@@ -6,7 +6,7 @@ public class Address {
     private String street;
     private int number;
     private String neighborhood;
-    private String cep;
+    private String CEP;
     private String complement;
     private String city;
     private String state;
@@ -45,12 +45,12 @@ public class Address {
         this.neighborhood = neighborhood;
     }
 
-    public String getCep() {
-        return cep;
+    public String getCEP() {
+        return CEP;
     }
 
-    public void setCep(String cep) {
-        this.cep = cep;
+    public void setCEP(String CEP) {
+        this.CEP = CEP;
     }
 
     public String getComplement() {
