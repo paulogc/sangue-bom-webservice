@@ -1,7 +1,7 @@
 package br.com.bom.sangue.entities;
 
 
-public class BoodDonator extends User {
+public class BloodDonator extends User {
     private String bloodType;
     private String bloodFactor;
     private String CPF;
