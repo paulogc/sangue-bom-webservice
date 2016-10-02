@@ -1,2 +1,5 @@
 br/com/bom/sangue/service/Teste.class
+br/com/bom/sangue/controller/OtherController.class
+br/com/bom/sangue/entities/TesteEntitie.class
+br/com/bom/sangue/config/ConfigServiceApplication.class
 br/com/bom/sangue/controller/SampleController.class

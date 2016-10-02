@@ -1,10 +1,14 @@
 package br.com.bom.sangue.service;
 
+import br.com.bom.sangue.entities.TesteEntitie;
 
 public class Teste {
 	
-	public String teste (String string) {
-		return "Você disse: " + string + ". Chupetinha também é viado!";
+	public TesteEntitie teste (String string) {
+		TesteEntitie teste = new TesteEntitie();
+		teste.setTeste(string);
+		teste.setNumero(10);
+		return teste;
 	}
 
 }
