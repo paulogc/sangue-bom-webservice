@@ -2,7 +2,7 @@ package br.com.bom.sangue.entities;
 
 import java.util.Date;
 
-public class News extends User {
+public class News {
     private Long id;
     private String title;
     private String text;
