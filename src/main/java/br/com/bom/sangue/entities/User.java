@@ -1,13 +1,15 @@
 package br.com.bom.sangue.entities;
 
+import java.util.Date;
+import java.util.List;
+
 public class User {
 	
     private Long id;
     private String name;
     private String email;
-    private Long addressId;
-
-    private Telephone telephone;
+    private Date birthdate;
+    private Address address;
 
     public Long getId() {
         return id;
@@ -33,19 +35,20 @@ public class User {
         this.name = name;
     }
 
-    public Telephone getTelephone() {
-        return telephone;
+    public Date getBirthdate() {
+        return birthdate;
     }
 
-    public void setTelephone(Telephone telephone) {
-        this.telephone = telephone;
+    public void setBirthdate(Date birthdate) {
+        this.birthdate = birthdate;
     }
 
-    public Long getAddressId() {
-        return addressId;
+    public Address getAddress() {
+        return address;
     }
 
-    public void setAddressId(Long addressId) {
-        this.addressId = addressId;
+    public void setAddress(Address address) {
+        this.address = address;
     }
+
 }
