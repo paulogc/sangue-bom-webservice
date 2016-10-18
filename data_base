@@ -1,0 +1,54 @@
+CREATE TABLE address(
+	id bigint not null auto_increment,
+	street varchar(255) not null,
+	number int not null,
+	neighborhood varchar(255) not null,
+	cep varchar(9) not null,
+	complement varchar(255) not null,
+	city varchar(255) not null,
+	state varchar(255) not null,
+	latitude double not null,
+	longitude double not null,
+	primary key (id)
+);
+
+CREATE TABLE user (
+	id long not null auto_increment unsigned,
+	name varchar(255) not null,
+	email varchar(255) not null,
+	adress_id long not null,
+	telephone_id long not null,
+	primary key (id),
+	foreign key (adress_id) references adress(id)
+	foreign key (telephone_id) references telephone(id)
+);
+
+-- HERANCAS?
+
+CREATE TABLE intent_donation(
+	id long not null auto_increment unsigned,
+	created_at date not null,
+	active boolean not null,
+	grant_date date not null,
+	blood_donator long not null,
+	primary key (id),
+	foreign key (blood_donator) references blood_donator(id)
+);
+
+CREATE TABLE news(
+	id long not null auto_increment unsigned,
+	title varchar(255) not null,
+	text text not null,
+	created_at date not null,
+	administrator_id long,
+	primary key (id),
+	foreign key (administrator_id) references administrator(id)
+);
+
+CREATE TABLE telephone(
+	id long not null auto_increment unsigned,
+	ddi int not null,
+	ddd int not null,
+	number varchar(20),
+	primary key (id)
+);
