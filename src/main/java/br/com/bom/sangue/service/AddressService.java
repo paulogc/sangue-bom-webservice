@@ -33,7 +33,7 @@ public class AddressService {
 		return addressDAO.create(address);
 	}
 	
-	public Address update (Address address) {
+	public Address update (Address address) throws ClassNotFoundException, SQLException {
 		LOGGER.info("Updating address in database");
 		
 		LOGGER.info("> Street {}", address.getStreet());
@@ -46,7 +46,7 @@ public class AddressService {
 		LOGGER.info("> Latitude {}", address.getLatitude());
 		LOGGER.info("> Longitude {}", address.getLongitude());
 		
-		return address;
+		return addressDAO.update(address);
 	}
 	
 	public Address findOneById (Long id) throws ClassNotFoundException, SQLException {
