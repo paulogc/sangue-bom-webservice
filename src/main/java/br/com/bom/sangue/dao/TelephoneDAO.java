@@ -11,8 +11,11 @@ import java.sql.SQLException;
 public class TelephoneDAO {
 
     private String insertQuery = "INSERT INTO telephone (number, ddi, ddd, type) VALUES (?, ?, ?, ?)";
+    
     private String findOneByIdQuery = "SELECT * FROM Telephone WHERE id = ?";
+    
     private String updateQuery = "UPDATE telephone SET number = ?, ddi = ?, ddd = ?, type = ? WHERE id = ?";
+    
     private String deleteQuery = "DELETE FROM telephone WHERE id = ?";
 
     public Telephone create(Telephone telephone) throws ClassNotFoundException, SQLException {
