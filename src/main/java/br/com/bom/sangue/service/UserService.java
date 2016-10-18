@@ -12,6 +12,6 @@ public class UserService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(User.class);
 
-    
+
 
 }

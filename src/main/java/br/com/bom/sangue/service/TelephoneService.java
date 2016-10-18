@@ -13,7 +13,7 @@ public class TelephoneService {
 
     TelephoneDAO telephoneDAO = new TelephoneDAO();
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(Telephone.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(TelephoneService.class);
 
     public Telephone create(Telephone telephone) throws ClassNotFoundException, SQLException {
         LOGGER.info("Saving telephone in database");
