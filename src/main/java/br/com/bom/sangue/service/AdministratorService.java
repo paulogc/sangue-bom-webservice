@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import br.com.bom.sangue.dao.AdministratorDAO;
+import br.com.bom.sangue.entities.Address;
 import br.com.bom.sangue.entities.Administrator;
 import br.com.bom.sangue.entities.User;
 
@@ -23,7 +24,7 @@ public class AdministratorService {
 	public Administrator create (Administrator administrator) throws ClassNotFoundException, SQLException {	
 		LOGGER.info("Saving administrator in database");
 		
-		User user = new User(administrator.getName(), administrator.getEmail(), administrator.getBirthdate());
+		User user = new User(administrator.getName(), administrator.getEmail(), administrator.getBirthdate(), administrator.getAddress());
 		
 		user = userService.create(user);
 		

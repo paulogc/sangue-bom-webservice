@@ -14,10 +14,11 @@ public class User {
     	
     }
     
-    public User (String name, String email, Date birthdate) {
+    public User (String name, String email, Date birthdate, Address address) {
     	this.name = name;
     	this.email = email;
     	this.birthdate = birthdate;
+    	this.address = address;
     }
 
     public Long getId() {

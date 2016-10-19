@@ -11,7 +11,7 @@ public class DatabaseConnection	 {
 		
 	private String driver = "com.mysql.jdbc.Driver";
 	
-	private String url = "jdbc:mysql://localhost:3306/sangue_bom_db";
+	private String url = "jdbc:mysql://localhost:3306/db_sangue_bom";
 	
 	private String username = "root";
 	

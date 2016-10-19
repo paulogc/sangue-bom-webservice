@@ -20,7 +20,7 @@ public class AddressDAO {
 	
 	private String deleteQuery = "DELETE FROM address WHERE id = ?";
 
-	private String getLastInsertId = "SELECT MAX(id) FROM address";
+	private String getLastInsertId = "SELECT MAX(id) AS id FROM address";
 	
 	public Address create(Address address) throws ClassNotFoundException, SQLException{
 		DatabaseConnection database = DatabaseConnection.getInstance();
@@ -113,6 +113,8 @@ public class AddressDAO {
 	}
 
 	private Long findLastInsert() throws ClassNotFoundException, SQLException {
+		Address address = new Address();
+		
 		DatabaseConnection database = DatabaseConnection.getInstance();
 		Connection connection = database.getConnection();
 
@@ -120,9 +122,13 @@ public class AddressDAO {
 
 		ResultSet result = statement.executeQuery();
 
+		result.next();
+		
+		address.setId(result.getLong("id"));
+		
 		statement.close();
 
-		return result.getLong("id");
+		return address.getId();
 	}
 
 }

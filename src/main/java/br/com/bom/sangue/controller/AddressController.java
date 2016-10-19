@@ -17,7 +17,7 @@ public class AddressController {
 	
 	AddressService addressService = new AddressService();
 	
-	@PostMapping()
+	@PostMapping
 	@ResponseBody
 	public Address create(@RequestBody Address address) throws ClassNotFoundException, SQLException {
 		return addressService.create(address);

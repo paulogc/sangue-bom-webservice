@@ -6,6 +6,10 @@ import br.com.bom.sangue.entities.Address;
 import br.com.bom.sangue.entities.User;
 
 import java.sql.*;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+
+import org.flywaydb.core.internal.util.DateUtils;
 
 public class UserDAO {
 
@@ -17,7 +21,7 @@ public class UserDAO {
 
     private String deleteQuery = "DELETE FROM user WHERE id = ?";
     
-    private String findLastInsertedQuery = "SELECT MAX(id) FROM user";
+    private String findLastInsertedQuery = "SELECT MAX(id) AS id FROM user";
 
     public User create(User user) throws ClassNotFoundException, SQLException {
         DatabaseConnection dataBase = DatabaseConnection.getInstance();
@@ -90,9 +94,12 @@ public class UserDAO {
     }
 
     private PreparedStatement createStatement(PreparedStatement statement, User user) throws SQLException {
+    	DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+    	String birthdate = dateFormat.format(user.getBirthdate());
+    	    	
         statement.setString(1, user.getName());
         statement.setString(2, user.getEmail());
-        statement.setDate(3, (Date) user.getBirthdate());
+        statement.setString(3, birthdate);
         statement.setLong(4, user.getAddress().getId());
 
         return statement;
@@ -108,6 +115,8 @@ public class UserDAO {
 
         ResultSet result  = statment.executeQuery();
 
+        result.next();
+        
         user.setId(result.getLong("id"));
 
          statment.close();
