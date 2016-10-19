@@ -1,12 +1,12 @@
 package br.com.bom.sangue.service;
 
 import br.com.bom.sangue.dao.TelephoneDAO;
-import br.com.bom.sangue.entities.Address;
 import br.com.bom.sangue.entities.Telephone;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.sql.SQLException;
+import java.util.List;
 
 public class TelephoneService {
 
@@ -21,16 +21,17 @@ public class TelephoneService {
         LOGGER.info("> Type {}", telephone.getType());
         LOGGER.info("> Ddd {}", telephone.getDdd());
         LOGGER.info("> Ddi {}", telephone.getDdd());
+        LOGGER.info("> UserId {}", telephone.getUser().getId());
 
         return telephoneDAO.create(telephone);
     }
 
-    public Telephone findOneById(Long id) throws ClassNotFoundException, SQLException {
+    public List<Telephone> findOneById(Long id) throws ClassNotFoundException, SQLException {
         LOGGER.info("Geting one telephone by id");
 
         LOGGER.info("> Number {}", id);
 
-        return telephoneDAO.findOneById(id);
+        return telephoneDAO.findAllByUserId(id);
     }
 
     public Telephone update(Telephone telephone) throws  ClassNotFoundException, SQLException {
@@ -40,6 +41,7 @@ public class TelephoneService {
         LOGGER.info("> Type {}", telephone.getType());
         LOGGER.info("> Ddd {}", telephone.getDdd());
         LOGGER.info("> Ddi {}", telephone.getDdd());
+        LOGGER.info("> UserId {}", telephone.getUser().getId());
 
         return telephoneDAO.update(telephone);
     }

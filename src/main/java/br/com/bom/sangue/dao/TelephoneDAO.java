@@ -2,20 +2,23 @@ package br.com.bom.sangue.dao;
 
 import br.com.bom.sangue.config.DatabaseConnection;
 import br.com.bom.sangue.entities.Telephone;
+import br.com.bom.sangue.entities.User;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class TelephoneDAO {
 
-    private String insertQuery = "INSERT INTO telephone (number, ddi, ddd, type) VALUES (?, ?, ?, ?)";
-    
-    private String findOneByIdQuery = "SELECT * FROM Telephone WHERE id = ?";
-    
-    private String updateQuery = "UPDATE telephone SET number = ?, ddi = ?, ddd = ?, type = ? WHERE id = ?";
-    
+    private String insertQuery = "INSERT INTO telephone (number, ddi, ddd, type, userId) VALUES (?, ?, ?, ?, ?)";
+
+    private String findAllByUserIdQuery = "SELECT * FROM Telephone WHERE user_id = ?";
+
+    private String updateQuery = "UPDATE telephone SET number = ?, ddi = ?, ddd = ?, type = ?, user_id = ? WHERE id = ?";
+
     private String deleteQuery = "DELETE FROM telephone WHERE id = ?";
 
     public Telephone create(Telephone telephone) throws ClassNotFoundException, SQLException {
@@ -34,13 +37,15 @@ public class TelephoneDAO {
         return telephone;
     }
 
-    public Telephone findOneById(Long id) throws  ClassNotFoundException, SQLException {
+    public List<Telephone> findAllByUserId(Long id) throws  ClassNotFoundException, SQLException {
         Telephone telephone = new Telephone();
+        User user = new User();
+        List<Telephone> telephones = new ArrayList<>();
 
         DatabaseConnection dataBase = DatabaseConnection.getInstance();
         Connection connection = dataBase.getConnection();
 
-        PreparedStatement statment = connection.prepareStatement(findOneByIdQuery);
+        PreparedStatement statment = connection.prepareStatement(findAllByUserIdQuery);
 
         statment.setLong(1, id);
 
@@ -52,11 +57,15 @@ public class TelephoneDAO {
             telephone.setDdi(result.getInt("ddi"));
             telephone.setDdd(result.getInt("ddd"));
             telephone.setType(result.getString("type"));
+            user.setId(result.getLong("user_id"));
+            telephone.setUser(user);
+
+            telephones.add(telephone);
         }
 
         statment.close();
 
-        return telephone;
+        return telephones;
     }
 
     public Telephone update(Telephone telephone) throws ClassNotFoundException, SQLException {
@@ -67,7 +76,7 @@ public class TelephoneDAO {
         PreparedStatement statement = connection.prepareStatement(updateQuery);
 
         statement = createStatment(statement, telephone);
-        statement.setLong(5, telephone.getId());
+        statement.setLong(6, telephone.getId());
 
         statement.executeUpdate();
 
@@ -95,6 +104,7 @@ public class TelephoneDAO {
         statement.setInt(2, telephone.getDdi());
         statement.setInt(3, telephone.getDdd());
         statement.setString(4, telephone.getType());
+        statement.setLong(5, telephone.getUser().getId());
 
         return statement;
     }

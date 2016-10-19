@@ -3,6 +3,7 @@ package br.com.bom.sangue.entities;
 
 public class Telephone {
     private Long id;
+    private User user;
     private int ddi;
     private int ddd;
     private String number;
@@ -13,6 +14,14 @@ public class Telephone {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public int getDdd() {
