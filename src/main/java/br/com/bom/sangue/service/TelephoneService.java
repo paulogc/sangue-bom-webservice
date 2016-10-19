@@ -1,7 +1,6 @@
 package br.com.bom.sangue.service;
 
 import br.com.bom.sangue.dao.TelephoneDAO;
-import br.com.bom.sangue.entities.Address;
 import br.com.bom.sangue.entities.Telephone;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

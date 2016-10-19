@@ -3,7 +3,6 @@ package br.com.bom.sangue.dao;
 
 import br.com.bom.sangue.config.DatabaseConnection;
 import br.com.bom.sangue.entities.Address;
-import br.com.bom.sangue.entities.Telephone;
 import br.com.bom.sangue.entities.User;
 
 import java.sql.*;
@@ -14,7 +13,7 @@ public class UserDAO {
     private String updateQuery = "UPDATE user SET name = ?, email = ?, birthdate = ?, address_is = ? WHERE id = ?";
     private String deleteQuery = "DELETE FROM user WHERE id = ?";
 
-    public User creste(User user) throws ClassNotFoundException, SQLException {
+    public User create(User user) throws ClassNotFoundException, SQLException {
         DatabaseConnection dataBase = DatabaseConnection.getInstance();
         Connection connection = dataBase.getConnection();
 
@@ -55,7 +54,7 @@ public class UserDAO {
         return user;
     }
 
-    private User update(User user) throws ClassNotFoundException, SQLException {
+    public User update(User user) throws ClassNotFoundException, SQLException {
         DatabaseConnection dataBase = DatabaseConnection.getInstance();
         Connection connection = dataBase.getConnection();
 
@@ -71,7 +70,7 @@ public class UserDAO {
         return user;
     }
 
-    private void delete(Long id) throws ClassNotFoundException, SQLException {
+    public void delete(Long id) throws ClassNotFoundException, SQLException {
         DatabaseConnection dataBase = DatabaseConnection.getInstance();
         Connection connection = dataBase.getConnection();
 
