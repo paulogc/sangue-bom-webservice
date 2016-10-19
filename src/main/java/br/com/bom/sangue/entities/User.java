@@ -9,6 +9,16 @@ public class User {
     private String email;
     private Date birthdate;
     private Address address;
+    
+    public User () {
+    	
+    }
+    
+    public User (String name, String email, Date birthdate) {
+    	this.name = name;
+    	this.email = email;
+    	this.birthdate = birthdate;
+    }
 
     public Long getId() {
         return id;

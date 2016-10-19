@@ -16,6 +16,8 @@ public class UserDAO {
     private String updateQuery = "UPDATE user SET name = ?, email = ?, birthdate = ?, address_is = ? WHERE id = ?";
 
     private String deleteQuery = "DELETE FROM user WHERE id = ?";
+    
+    private String findLastInsertedQuery = "SELECT MAX(id) FROM user";
 
     public User create(User user) throws ClassNotFoundException, SQLException {
         DatabaseConnection dataBase = DatabaseConnection.getInstance();
@@ -28,6 +30,8 @@ public class UserDAO {
         statement.execute();
 
         statement.close();
+        
+        user.setId(findLastInserted());
 
         return user;
     }
@@ -92,6 +96,24 @@ public class UserDAO {
         statement.setLong(4, user.getAddress().getId());
 
         return statement;
+    }
+    
+    private Long findLastInserted () throws ClassNotFoundException, SQLException {
+    	User user = new User();
+
+        DatabaseConnection dataBase = DatabaseConnection.getInstance();
+        Connection connection = dataBase.getConnection();
+
+        PreparedStatement statment = connection.prepareStatement(findLastInsertedQuery);
+
+        ResultSet result  = statment.executeQuery();
+
+        user.setId(result.getLong("id"));
+
+         statment.close();
+
+         return user.getId();
+    	
     }
 
 }
