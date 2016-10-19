@@ -1,6 +1,7 @@
 package br.com.bom.sangue.service;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -37,6 +38,12 @@ public class NewsService {
 		LOGGER.info("> Administrator {}", news.getAdministrator().getId());
 		
 		return newsDAO.update(news);
+	}
+	
+	public List<News> findAllOrderByCreatedAt () throws ClassNotFoundException, SQLException {
+		LOGGER.info("Find all order by created at");
+		
+		return newsDAO.findAllOrderByCreatedAt();
 	}
 	
 }
