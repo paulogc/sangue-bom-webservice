@@ -18,9 +18,9 @@ public class BloodDonatorDAO {
     private String findOneById = "SELECT * FROM bood_donator WHERE id = ?";
 
     private String updateQuery = "UPDATE bood_donator SET blood_type = ?, blood_factor = ?, cpf = ? nick_name = ?, " +
-            "user_id = ?";
+            "user_id = ? WHERE id = ?";
 
-    private String delete = "DELETE FROM bood_donator WHERE id = ?";
+    private String deleteQuery = "DELETE FROM bood_donator WHERE id = ?";
 
     public BloodDonator create(BloodDonator bloodDonator, User user) throws ClassNotFoundException, SQLException {
         DatabaseConnection dataBase = DatabaseConnection.getInstance();
@@ -58,6 +58,36 @@ public class BloodDonatorDAO {
         statement.close();
 
         return bloodDonator;
+    }
+
+    public BloodDonator update(BloodDonator bloodDonator) throws ClassNotFoundException, SQLException {
+
+        DatabaseConnection dataBase = DatabaseConnection.getInstance();
+        Connection connection = dataBase.getConnection();
+
+        PreparedStatement statement = connection.prepareStatement(updateQuery);
+
+        statement = createStatement(statement, bloodDonator, bloodDonator);
+
+        statement.executeUpdate();
+
+        statement.close();
+
+        return bloodDonator;
+    }
+
+    public void delete(Long id) throws ClassNotFoundException, SQLException {
+
+        DatabaseConnection dataBase = DatabaseConnection.getInstance();
+        Connection connection = dataBase.getConnection();
+
+        PreparedStatement statement = connection.prepareStatement(deleteQuery);
+
+        statement.setLong(1, id);
+
+        statement.execute();
+
+        statement.close();
     }
 
     private PreparedStatement createStatement(PreparedStatement statement, BloodDonator bloodDonator, User user) throws SQLException {

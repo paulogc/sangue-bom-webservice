@@ -20,6 +20,11 @@ public class BloodDonatorService {
     public BloodDonator create(BloodDonator bloodDonator) throws ClassNotFoundException, SQLException {
         LOGGER.info("Saving blood Donator in database");
 
+        LOGGER.info("> Bloood type {}", bloodDonator.getBloodType());
+        LOGGER.info("> Bloood factor {}", bloodDonator.getBloodFactor());
+        LOGGER.info("> Bloood CPF {}", bloodDonator.getCPF());
+        LOGGER.info("> Bloood nick name {}", bloodDonator.getNickName());
+
         User user = new User(bloodDonator.getName(), bloodDonator.getEmail(), bloodDonator.getBirthdate());
 
         user = userService.create(user);
@@ -28,7 +33,7 @@ public class BloodDonatorService {
     }
 
     public BloodDonator findOneById(Long id) throws ClassNotFoundException, SQLException {
-        LOGGER.info("Getting blood Donator by id");
+        LOGGER.info("Getting Blood Donator by id");
         BloodDonator bloodDonator = new BloodDonator();
 
         bloodDonator = bloodDonatorDAO.findOneById(id);
@@ -36,6 +41,35 @@ public class BloodDonatorService {
         bloodDonator = (BloodDonator) userService.findOneById(bloodDonator);
 
         return bloodDonator;
+    }
+
+    public BloodDonator update(BloodDonator bloodDonator) throws ClassNotFoundException, SQLException {
+        LOGGER.info("Updating Blood Donator");
+
+        LOGGER.info("> Bloood type {}", bloodDonator.getBloodType());
+        LOGGER.info("> Bloood factor {}", bloodDonator.getBloodFactor());
+        LOGGER.info("> Bloood CPF {}", bloodDonator.getCPF());
+        LOGGER.info("> Bloood nick name {}", bloodDonator.getNickName());
+
+        User user = new User(bloodDonator.getId(), bloodDonator.getName(), bloodDonator.getEmail(), bloodDonator.getBirthdate());
+
+        user = userService.update(user);
+
+        bloodDonator = bloodDonatorDAO.update(bloodDonator);
+
+        return bloodDonator;
+    }
+
+    public void delete(BloodDonator bloodDonator) throws ClassNotFoundException, SQLException {
+        LOGGER.info("Deleting Blood Donator");
+
+        LOGGER.info("> Bloood nick name {}", bloodDonator.getNickName());
+
+        User user = new User(bloodDonator.getId(), bloodDonator.getName(), bloodDonator.getEmail(), bloodDonator.getBirthdate());
+
+        userService.delete(user);
+
+        bloodDonatorDAO.delete(bloodDonator.getId());
     }
 
 
