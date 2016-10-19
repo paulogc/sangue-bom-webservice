@@ -11,7 +11,7 @@ import java.util.List;
 public class IntentDonationService {
     IntentDonationDAO intentDonationDAO = new IntentDonationDAO();
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(UserService.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(IntentDonationService.class);
 
     public IntentDonation create(IntentDonation intentDonation) throws ClassNotFoundException, SQLException {
         LOGGER.info("Creating Intent Donation");
