@@ -14,8 +14,11 @@ import java.util.List;
 public class TelephoneDAO {
 
     private String insertQuery = "INSERT INTO telephone (number, ddi, ddd, type, userId) VALUES (?, ?, ?, ?, ?)";
+
     private String findAllByUserIdQuery = "SELECT * FROM Telephone WHERE user_id = ?";
+
     private String updateQuery = "UPDATE telephone SET number = ?, ddi = ?, ddd = ?, type = ?, user_id = ? WHERE id = ?";
+
     private String deleteQuery = "DELETE FROM telephone WHERE id = ?";
 
     public Telephone create(Telephone telephone) throws ClassNotFoundException, SQLException {

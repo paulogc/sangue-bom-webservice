@@ -8,9 +8,13 @@ import br.com.bom.sangue.entities.User;
 import java.sql.*;
 
 public class UserDAO {
+
     private String insertQuery = "INSERT INTO user (name, email, birthdate, address_id) VALUES(?, ?, ?, ?)";
+
     private String findOneByIdQuery = "SELECT * FROM user WHERE id = ?";
+
     private String updateQuery = "UPDATE user SET name = ?, email = ?, birthdate = ?, address_is = ? WHERE id = ?";
+
     private String deleteQuery = "DELETE FROM user WHERE id = ?";
 
     public User create(User user) throws ClassNotFoundException, SQLException {
