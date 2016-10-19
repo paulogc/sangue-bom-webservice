@@ -10,13 +10,17 @@ import br.com.bom.sangue.entities.Address;
 
 public class AddressDAO {
 	
-	private String insertQuery = "INSERT INTO address (street, number, neighborhood, cep, complement, city, state, latitude, longitude) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+	private String insertQuery = "INSERT INTO address (street, number, neighborhood, cep, complement, city, state," +
+			" latitude, longitude) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 	
-	private String updateQuery = "UPDATE address SET street = ?, number = ?, neighborhood = ?, cep = ?, complement = ?, city = ?, state = ?, latitude = ?, longitude = ? WHERE id = ?";
+	private String updateQuery = "UPDATE address SET street = ?, number = ?, neighborhood = ?, cep = ?," +
+			" complement = ?, city = ?, state = ?, latitude = ?, longitude = ? WHERE id = ?";
 	
 	private String findOneByIdQuery = "SELECT * FROM address WHERE id = ? LIMIT 1";
 	
-	private String deleteQuery = "DELETE FROM adress WHERE id = ?";
+	private String deleteQuery = "DELETE FROM address WHERE id = ?";
+
+	private String getLastInsertId = "SELECT MAX(id) FROM address";
 	
 	public Address create(Address address) throws ClassNotFoundException, SQLException{
 		DatabaseConnection database = DatabaseConnection.getInstance();
@@ -27,6 +31,10 @@ public class AddressDAO {
 		statement = createStatement(statement, address);
 		
 		statement.execute();
+
+		statement.close();
+
+		address.setId(findLastInsert());
 		
 		return address;
 	}
@@ -42,6 +50,8 @@ public class AddressDAO {
 		statement.setLong(10, address.getId());
 		
 		statement.executeUpdate();
+
+		statement.close();
 		
 		return address;
 	}
@@ -100,6 +110,19 @@ public class AddressDAO {
 		statement.setDouble(9, address.getLongitude());
 		
 		return statement;
+	}
+
+	private Long findLastInsert() throws ClassNotFoundException, SQLException {
+		DatabaseConnection database = DatabaseConnection.getInstance();
+		Connection connection = database.getConnection();
+
+		PreparedStatement statement = connection.prepareStatement(getLastInsertId);
+
+		ResultSet result = statement.executeQuery();
+
+		statement.close();
+
+		return result.getLong("id");
 	}
 
 }

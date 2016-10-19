@@ -12,12 +12,14 @@ import java.sql.SQLException;
 public class UserService {
 
     UserDAO userDao = new UserDAO();
-    AddressDAO addressDAO = new AddressDAO();
+    AddressService addressService = new AddressService();
 
     private static final Logger LOGGER = LoggerFactory.getLogger(UserService.class);
 
     public User create(User user) throws ClassNotFoundException, SQLException {
         LOGGER.info("Saving user in database");
+
+        user.setAddress(addressService.create(user.getAddress()));
 
         LOGGER.info("> Name {}", user.getName());
         LOGGER.info("> Email {}", user.getEmail());
@@ -34,13 +36,15 @@ public class UserService {
         LOGGER.info("> Id {}", id);
 
         user =  userDao.findOneById(id);
-        user.setAddress(addressDAO.findOneById(user.getAddress().getId()));
+        user.setAddress(addressService.findOneById(user.getAddress().getId()));
 
         return user;
     }
 
     public User update(User user) throws ClassNotFoundException, SQLException {
         LOGGER.info("Updating user");
+
+        addressService.update(user.getAddress());
 
         LOGGER.info("> Name {}", user.getName());
         LOGGER.info("> Email {}", user.getEmail());
@@ -50,12 +54,14 @@ public class UserService {
         return userDao.update(user);
     }
 
-    public void delete(Long id) throws ClassNotFoundException, SQLException {
+    public void delete(User user) throws ClassNotFoundException, SQLException {
         LOGGER.info("Deleting user");
 
-        LOGGER.info("> Id {}", id);
+        addressService.delete(user.getAddress().getId());
 
-        userDao.delete(id);
+        LOGGER.info("> Id {}", user.getId());
+
+        userDao.delete(user.getId());
     }
 
 }
