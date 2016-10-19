@@ -21,6 +21,13 @@ public class User {
     	this.address = address;
     }
 
+    public User (Long id, String name, String email, Date birthdate) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+        this.birthdate = birthdate;
+    }
+
     public Long getId() {
         return id;
     }

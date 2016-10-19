@@ -17,7 +17,7 @@ public class UserDAO {
 
     private String findOneByIdQuery = "SELECT * FROM user WHERE id = ?";
 
-    private String updateQuery = "UPDATE user SET name = ?, email = ?, birthdate = ?, address_is = ? WHERE id = ?";
+    private String updateQuery = "UPDATE user SET name = ?, email = ?, birthdate = ?, address_id = ? WHERE id = ?";
 
     private String deleteQuery = "DELETE FROM user WHERE id = ?";
     
@@ -47,11 +47,11 @@ public class UserDAO {
         DatabaseConnection dataBase = DatabaseConnection.getInstance();
         Connection connection = dataBase.getConnection();
 
-        PreparedStatement statment = connection.prepareStatement(findOneByIdQuery);
+        PreparedStatement statement = connection.prepareStatement(findOneByIdQuery);
 
-        statment.setLong(1, id);
+        statement.setLong(1, id);
 
-        ResultSet result  = statment.executeQuery();
+        ResultSet result  = statement.executeQuery();
 
         while (result.next()) {
             user.setName(result.getString("name"));
@@ -61,7 +61,7 @@ public class UserDAO {
             user.setAddress(address);
         }
 
-        statment.close();
+        statement.close();
 
         return user;
     }
