@@ -8,9 +8,6 @@ import org.slf4j.LoggerFactory;
 import br.com.bom.sangue.dao.AddressDAO;
 import br.com.bom.sangue.entities.Address;
 
-/**
- * Created by paulo on 02/10/16.
- */
 public class AddressService {
 	
 	AddressDAO addressDAO = new AddressDAO();
