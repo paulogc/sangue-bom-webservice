@@ -23,7 +23,7 @@ public class BloodDonatorService {
         LOGGER.info("> Bloood type {}", bloodDonator.getBloodType());
         LOGGER.info("> Bloood factor {}", bloodDonator.getBloodFactor());
         LOGGER.info("> Bloood CPF {}", bloodDonator.getCPF());
-        LOGGER.info("> Bloood nick name {}", bloodDonator.getNickName());
+        LOGGER.info("> Bloood nick name {}", bloodDonator.getNickname());
 
         User user = new User(bloodDonator.getName(), bloodDonator.getEmail(),
                 bloodDonator.getBirthdate(), bloodDonator.getAddress());
@@ -50,7 +50,7 @@ public class BloodDonatorService {
         LOGGER.info("> Bloood type {}", bloodDonator.getBloodType());
         LOGGER.info("> Bloood factor {}", bloodDonator.getBloodFactor());
         LOGGER.info("> Bloood CPF {}", bloodDonator.getCPF());
-        LOGGER.info("> Bloood nick name {}", bloodDonator.getNickName());
+        LOGGER.info("> Bloood nick name {}", bloodDonator.getNickname());
 
         User user = new User(bloodDonator.getId(), bloodDonator.getName(), bloodDonator.getEmail(),
                 bloodDonator.getBirthdate(), bloodDonator.getAddress());
@@ -65,7 +65,7 @@ public class BloodDonatorService {
     public void delete(BloodDonator bloodDonator) throws ClassNotFoundException, SQLException {
         LOGGER.info("Deleting Blood Donator");
 
-        LOGGER.info("> Bloood nick name {}", bloodDonator.getNickName());
+        LOGGER.info("> Bloood nick name {}", bloodDonator.getNickname());
 
         User user = new User(bloodDonator.getId(), bloodDonator.getName(), bloodDonator.getEmail(),
                 bloodDonator.getBirthdate(), bloodDonator.getAddress());

@@ -11,11 +11,11 @@ public class DatabaseConnection	 {
 		
 	private String driver = "com.mysql.jdbc.Driver";
 	
-	private String url = "jdbc:mysql://localhost:3306/db_sangue_bom";
+	private String url = "jdbc:mysql://localhost:3306/sangue_bom_db";
 	
 	private String username = "root";
 	
-	private String password = "rafa1993";
+	private String password = "root";
 
 	private static Connection CONNECTION;
 	

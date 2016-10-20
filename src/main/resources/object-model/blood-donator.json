@@ -1,0 +1,22 @@
+{
+  "id": null,
+  "name": "Lucas Viado",
+  "email": "lucasviadinho@gmail.com",
+  "birthdate": 1476835200,
+  "address": {
+    "id": 1,
+    "street": "Rua Maristela T. Custodio",
+    "number": 1258,
+    "neighborhood": "Cidade Aracy",
+    "cep": "13573-026",
+    "complement": "Nada",
+    "city": "São Carlos",
+    "state": "São Paulo",
+    "latitude": 3,
+    "longitude": 4
+  },
+  "bloodType": "O",
+  "bloodFactor": "+",
+  "cpf": "12312312321",
+  "nickname": "luGay"
+}

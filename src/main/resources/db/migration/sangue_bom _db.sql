@@ -26,13 +26,13 @@ create table user(
 );
 
 create table blood_donator(
-	id bigint unsigned not null,
+	user_id bigint unsigned not null,
 	blood_type varchar(2) not null,
 	blood_factor varchar(1) not null,
 	cpf varchar(11) not null,
 	nickname varchar(255) not null,
-	primary key (id),
-	foreign key (id) references user(id)
+	primary key (user_id),
+	foreign key (user_id) references user(id)
 );
 
 create table administrator(
@@ -75,5 +75,5 @@ create table intent_donation(
 	grant_date date not null,
 	blood_donator bigint unsigned not null,
 	primary key (id),
-	foreign key (blood_donator) references blood_donator(id)
+	foreign key (blood_donator) references blood_donator(user_id)
 );

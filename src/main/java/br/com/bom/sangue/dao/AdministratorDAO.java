@@ -15,13 +15,13 @@ public class AdministratorDAO {
 	
 	private String insertQuery = "INSERT INTO administrator (password, user_id) VALUES (?, ?)";
 	
-	private String findOneByIdQuery = "SELECT * FROM administrator WHERE id = ?";
+	private String findOneByIdQuery = "SELECT * FROM administrator WHERE user_id = ?";
 	
-	private String updateQuery = "UPDATE administrator SET password = ? WHERE id = ?";
+	private String updateQuery = "UPDATE administrator SET password = ? WHERE user_id = ?";
 
-    private String deleteQuery = "DELETE FROM administrator WHERE id = ?";
+    private String deleteQuery = "DELETE FROM administrator WHERE user_id = ?";
     
-    private String findLastInsertedQuery = "SELECT MAX(id) FROM administrator";
+    private String findLastInsertedQuery = "SELECT MAX(user_id) AS id FROM administrator";
 	
 	public Administrator create (Administrator administrator, User user) throws ClassNotFoundException, SQLException {
 		DatabaseConnection dataBase = DatabaseConnection.getInstance();
@@ -54,7 +54,7 @@ public class AdministratorDAO {
 
         while (result.next()) {
         	administrator.setPassword(result.getString("name"));
-        	administrator.setId(result.getLong("id"));
+        	administrator.setId(result.getLong("user_id"));
         }
 
         statement.close();
@@ -110,11 +110,12 @@ public class AdministratorDAO {
 
         ResultSet result  = statment.executeQuery();
 
-        administrator.setId(result.getLong("id"));
+        while (result.next()) {
+            administrator.setId(result.getLong("id"));
+        }
+        statment.close();
 
-         statment.close();
-
-         return administrator.getId();
+        return administrator.getId();
     	
     }
 	
