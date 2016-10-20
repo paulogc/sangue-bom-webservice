@@ -50,10 +50,10 @@ public class AdministratorDAO {
 
         statement.setLong(1, id);
 
-        ResultSet result  = statement.executeQuery();
+        ResultSet result = statement.executeQuery();
 
         while (result.next()) {
-        	administrator.setPassword(result.getString("name"));
+        	administrator.setPassword(result.getString("password"));
         	administrator.setId(result.getLong("user_id"));
         }
 
@@ -93,13 +93,6 @@ public class AdministratorDAO {
         statement.execute();
     }
 	
-	private PreparedStatement createStatement(PreparedStatement statement, Administrator administrator, User user) throws SQLException {
-        statement.setString(1, administrator.getPassword());
-        statement.setLong(2, user.getId());
-        
-        return statement;
-    }
-	
 	private Long findLastInserted () throws ClassNotFoundException, SQLException {
     	Administrator administrator = new Administrator();
 
@@ -108,7 +101,7 @@ public class AdministratorDAO {
 
         PreparedStatement statment = connection.prepareStatement(findLastInsertedQuery);
 
-        ResultSet result  = statment.executeQuery();
+        ResultSet result = statment.executeQuery();
 
         while (result.next()) {
             administrator.setId(result.getLong("id"));
@@ -117,6 +110,13 @@ public class AdministratorDAO {
 
         return administrator.getId();
     	
+    }
+	
+	private PreparedStatement createStatement(PreparedStatement statement, Administrator administrator, User user) throws SQLException {
+        statement.setString(1, administrator.getPassword());
+        statement.setLong(2, user.getId());
+        
+        return statement;
     }
 	
 }
