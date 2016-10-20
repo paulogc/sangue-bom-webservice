@@ -1,7 +1,6 @@
 package br.com.bom.sangue.dao;
 
 import br.com.bom.sangue.config.DatabaseConnection;
-import br.com.bom.sangue.entities.Administrator;
 import br.com.bom.sangue.entities.BloodDonator;
 import br.com.bom.sangue.entities.User;
 
@@ -17,10 +16,10 @@ public class BloodDonatorDAO {
 
     private String findOneById = "SELECT * FROM blood_donator WHERE user_id = ?";
 
-    private String updateQuery = "UPDATE bood_donator SET blood_type = ?, blood_factor = ?, cpf = ? nickname = ?, " +
-            "user_id = ? WHERE user_id = ?";
+    private String updateQuery = "UPDATE blood_donator SET blood_type = ?, blood_factor = ?, cpf = ?, nickname = ?" +
+            " WHERE user_id = ?";
 
-    private String deleteQuery = "DELETE FROM bood_donator WHERE user_id = ?";
+    private String deleteQuery = "DELETE FROM blood_donator WHERE user_id = ?";
 
     private String findLastInsertedQuery = "SELECT MAX(user_id) AS id FROM blood_donator";
 
@@ -73,7 +72,9 @@ public class BloodDonatorDAO {
 
         PreparedStatement statement = connection.prepareStatement(updateQuery);
 
-        statement = createStatement(statement, bloodDonator, bloodDonator);
+        statement = createStatement(statement, bloodDonator);
+
+        statement.setLong(5, bloodDonator.getId());
 
         statement.executeUpdate();
 
@@ -113,6 +114,15 @@ public class BloodDonatorDAO {
 
         return bloodDonator.getId();
 
+    }
+
+    private PreparedStatement createStatement(PreparedStatement statement, BloodDonator bloodDonator) throws SQLException {
+        statement.setString(1, bloodDonator.getBloodType());
+        statement.setString(2, bloodDonator.getBloodFactor());
+        statement.setString(3, bloodDonator.getCPF());
+        statement.setString(4, bloodDonator.getNickname());
+
+        return statement;
     }
 
     private PreparedStatement createStatement(PreparedStatement statement, BloodDonator bloodDonator, User user) throws SQLException {

@@ -82,9 +82,9 @@ public class BloodDonatorService {
         User user = new User(bloodDonator.getId(), bloodDonator.getName(), bloodDonator.getEmail(),
                 bloodDonator.getBirthdate(), bloodDonator.getAddress());
 
-        userService.delete(user);
-
         bloodDonatorDAO.delete(bloodDonator.getId());
+
+        userService.delete(user);
     }
 
 

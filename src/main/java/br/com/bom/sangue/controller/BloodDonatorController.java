@@ -24,9 +24,24 @@ public class BloodDonatorController {
 
     @GetMapping(value="/{id}")
     @ResponseBody
-    public BloodDonator finOneById (@PathVariable("id") long id)
+    public BloodDonator findOneById (@PathVariable("id") Long id)
             throws ClassNotFoundException, SQLException {
         return (bloodDonatorService.findOneById(id));
+    }
+
+    @PutMapping("/update")
+    @ResponseBody
+    public BloodDonator update (@RequestBody BloodDonator bloodDonator) throws
+            ClassNotFoundException, SQLException {
+        return (bloodDonatorService.update(bloodDonator));
+    }
+
+    @DeleteMapping("/delete")
+    @ResponseBody
+    public String delete (@RequestBody BloodDonator bloodDonator) throws ClassNotFoundException, SQLException {
+        bloodDonatorService.delete(bloodDonator);
+
+        return("Successfuly deleted");
     }
 
 }

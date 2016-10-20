@@ -56,12 +56,11 @@ public class UserService {
 
     public void delete(User user) throws ClassNotFoundException, SQLException {
         LOGGER.info("Deleting user");
-
-        addressService.delete(user.getAddress().getId());
-
         LOGGER.info("> Id {}", user.getId());
 
         userDao.delete(user.getId());
+
+        addressService.delete(user.getAddress().getId());
     }
 
 }
