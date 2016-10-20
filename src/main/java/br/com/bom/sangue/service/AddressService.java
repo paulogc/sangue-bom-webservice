@@ -49,7 +49,7 @@ public class AddressService {
 	public Address findOneById (Long id) throws ClassNotFoundException, SQLException {
 		LOGGER.info("Find one address by id {}", id);
 		
-		Address address = new Address();
+		Address address;
 		
 		address = addressDAO.findOneById(id);
 		

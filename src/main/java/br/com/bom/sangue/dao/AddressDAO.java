@@ -16,7 +16,7 @@ public class AddressDAO {
 	private String updateQuery = "UPDATE address SET street = ?, number = ?, neighborhood = ?, cep = ?," +
 			" complement = ?, city = ?, state = ?, latitude = ?, longitude = ? WHERE id = ?";
 	
-	private String findOneByIdQuery = "SELECT * FROM address WHERE id = ? LIMIT 1";
+	private String findOneByIdQuery = "SELECT * FROM address WHERE id = ?";
 	
 	private String deleteQuery = "DELETE FROM address WHERE id = ?";
 
@@ -70,6 +70,7 @@ public class AddressDAO {
 		
 		while (resultSet.next()) {
 			address.setId(resultSet.getLong("id"));
+			address.setStreet(resultSet.getString("street"));
 			address.setNumber(resultSet.getInt("number"));
 			address.setNeighborhood(resultSet.getString("neighborhood"));
 			address.setCep(resultSet.getString("cep"));

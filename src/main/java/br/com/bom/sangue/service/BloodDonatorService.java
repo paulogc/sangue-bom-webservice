@@ -35,11 +35,23 @@ public class BloodDonatorService {
 
     public BloodDonator findOneById(Long id) throws ClassNotFoundException, SQLException {
         LOGGER.info("Getting Blood Donator by id");
-        BloodDonator bloodDonator = new BloodDonator();
+        BloodDonator bloodDonator;
+        User user = new User();
 
         bloodDonator = bloodDonatorDAO.findOneById(id);
+        user = userService.findOneById(id);
 
-        bloodDonator = (BloodDonator) userService.findOneById(bloodDonator);
+        bloodDonator = new BloodDonator(
+                user.getId(),
+                user.getName(),
+                user.getEmail(),
+                user.getBirthdate(),
+                user.getAddress(),
+                bloodDonator.getBloodType(),
+                bloodDonator.getBloodFactor(),
+                bloodDonator.getCPF(),
+                bloodDonator.getNickname()
+        );
 
         return bloodDonator;
     }

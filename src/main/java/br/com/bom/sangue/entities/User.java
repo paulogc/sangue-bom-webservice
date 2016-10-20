@@ -26,6 +26,7 @@ public class User {
         this.name = name;
         this.email = email;
         this.birthdate = birthdate;
+        this.address = address;
     }
 
     public Long getId() {

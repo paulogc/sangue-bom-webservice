@@ -4,10 +4,7 @@ import br.com.bom.sangue.entities.BloodDonator;
 import br.com.bom.sangue.service.BloodDonatorService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.sql.SQLException;
 
@@ -23,6 +20,13 @@ public class BloodDonatorController {
     @ResponseBody
     public BloodDonator create (@RequestBody BloodDonator bloodDonator) throws ClassNotFoundException, SQLException {
         return (bloodDonatorService.create(bloodDonator));
+    }
+
+    @GetMapping(value="/{id}")
+    @ResponseBody
+    public BloodDonator finOneById (@PathVariable("id") long id)
+            throws ClassNotFoundException, SQLException {
+        return (bloodDonatorService.findOneById(id));
     }
 
 }

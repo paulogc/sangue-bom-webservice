@@ -15,12 +15,12 @@ public class BloodDonatorDAO {
     private String insertQuery = "INSERT INTO blood_donator (blood_type, blood_factor, cpf, nickname, user_id)" +
             " VALUES (?, ?, ?, ?, ?)";
 
-    private String findOneById = "SELECT * FROM bood_donator WHERE id = ?";
+    private String findOneById = "SELECT * FROM blood_donator WHERE user_id = ?";
 
     private String updateQuery = "UPDATE bood_donator SET blood_type = ?, blood_factor = ?, cpf = ? nickname = ?, " +
-            "user_id = ? WHERE id = ?";
+            "user_id = ? WHERE user_id = ?";
 
-    private String deleteQuery = "DELETE FROM bood_donator WHERE id = ?";
+    private String deleteQuery = "DELETE FROM bood_donator WHERE user_id = ?";
 
     private String findLastInsertedQuery = "SELECT MAX(user_id) AS id FROM blood_donator";
 
@@ -48,6 +48,8 @@ public class BloodDonatorDAO {
         Connection connection = dataBase.getConnection();
 
         PreparedStatement statement = connection.prepareStatement(findOneById);
+
+        statement.setLong(1, id);
 
         ResultSet result = statement.executeQuery();
 

@@ -54,6 +54,7 @@ public class UserDAO {
         ResultSet result  = statement.executeQuery();
 
         while (result.next()) {
+            user.setId(result.getLong("id"));
             user.setName(result.getString("name"));
             user.setEmail(result.getString("email"));
             user.setBirthdate(result.getDate("birthdate"));

@@ -29,12 +29,13 @@ public class UserService {
         return userDao.create(user);
     }
 
-    public  User findOneById(User user) throws ClassNotFoundException, SQLException {
+    public  User findOneById(Long id) throws ClassNotFoundException, SQLException {
+        User user;
         LOGGER.info("Getting user by id");
 
-        LOGGER.info("> Id {}", user.getId());
+        LOGGER.info("> Id {}", id);
 
-        user =  userDao.findOneById(user.getId());
+        user =  userDao.findOneById(id);
         user.setAddress(addressService.findOneById(user.getAddress().getId()));
 
         return user;
