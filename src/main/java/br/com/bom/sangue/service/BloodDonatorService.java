@@ -25,7 +25,8 @@ public class BloodDonatorService {
         LOGGER.info("> Bloood CPF {}", bloodDonator.getCPF());
         LOGGER.info("> Bloood nick name {}", bloodDonator.getNickName());
 
-        User user = new User(bloodDonator.getName(), bloodDonator.getEmail(), bloodDonator.getBirthdate());
+        User user = new User(bloodDonator.getName(), bloodDonator.getEmail(),
+                bloodDonator.getBirthdate(), bloodDonator.getAddress());
 
         user = userService.create(user);
 
@@ -51,7 +52,8 @@ public class BloodDonatorService {
         LOGGER.info("> Bloood CPF {}", bloodDonator.getCPF());
         LOGGER.info("> Bloood nick name {}", bloodDonator.getNickName());
 
-        User user = new User(bloodDonator.getId(), bloodDonator.getName(), bloodDonator.getEmail(), bloodDonator.getBirthdate());
+        User user = new User(bloodDonator.getId(), bloodDonator.getName(), bloodDonator.getEmail(),
+                bloodDonator.getBirthdate(), bloodDonator.getAddress());
 
         user = userService.update(user);
 
@@ -65,7 +67,8 @@ public class BloodDonatorService {
 
         LOGGER.info("> Bloood nick name {}", bloodDonator.getNickName());
 
-        User user = new User(bloodDonator.getId(), bloodDonator.getName(), bloodDonator.getEmail(), bloodDonator.getBirthdate());
+        User user = new User(bloodDonator.getId(), bloodDonator.getName(), bloodDonator.getEmail(),
+                bloodDonator.getBirthdate(), bloodDonator.getAddress());
 
         userService.delete(user);
 
