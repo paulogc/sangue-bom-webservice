@@ -63,16 +63,14 @@ public class AdministratorDAO {
     } 
 	
 	public Administrator update(Administrator administrator) throws ClassNotFoundException, SQLException {
-        DatabaseConnection dataBase = DatabaseConnection.getInstance();
+        
+		DatabaseConnection dataBase = DatabaseConnection.getInstance();
         Connection connection = dataBase.getConnection();
         
-        //tem cagada
-        User user = new User();
-
         PreparedStatement statement = connection.prepareStatement(updateQuery);
         
-        //tem cagada
-        statement = createStatement(statement, administrator, user);
+        statement.setString(1, administrator.getPassword());
+        
         statement.setLong(2, administrator.getId());
 
         statement.executeUpdate();
@@ -81,9 +79,10 @@ public class AdministratorDAO {
 
         return administrator;
     }
-	
-    public void delete(Long id) throws ClassNotFoundException, SQLException {
-        DatabaseConnection dataBase = DatabaseConnection.getInstance();
+
+	public void delete(Long id) throws ClassNotFoundException, SQLException {
+        
+		DatabaseConnection dataBase = DatabaseConnection.getInstance();
         Connection connection = dataBase.getConnection();
 
         PreparedStatement statement = connection.prepareStatement(deleteQuery);
@@ -91,6 +90,8 @@ public class AdministratorDAO {
         statement.setLong(1, id);
 
         statement.execute();
+        
+        statement.close();
     }
 	
 	private Long findLastInserted () throws ClassNotFoundException, SQLException {

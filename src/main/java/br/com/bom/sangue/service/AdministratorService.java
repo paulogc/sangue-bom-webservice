@@ -54,4 +54,30 @@ public class AdministratorService {
 		return administrator;
 	}
 	
+	 public Administrator update(Administrator administrator) throws ClassNotFoundException, SQLException {
+	        LOGGER.info("Updating Administrator");
+
+	        LOGGER.info("> Password {}", administrator.getPassword());
+	        
+	        User user = new User(administrator.getId(), administrator.getName(), administrator.getEmail(),
+	        		administrator.getBirthdate(), administrator.getAddress());
+
+	        user = userService.update(user);
+
+	        administrator = administratorDAO.update(administrator);
+
+	        return administrator;
+	    }
+
+	    public void delete(Administrator administrator) throws ClassNotFoundException, SQLException {
+	        LOGGER.info("Deleting Administrator");
+
+	        User user = new User(administrator.getId(), administrator.getName(), administrator.getEmail(),
+	        		administrator.getBirthdate(), administrator.getAddress());
+
+	        administratorDAO.delete(administrator.getId());
+
+	        userService.delete(user);
+	    }
+	
 }
