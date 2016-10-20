@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -11,7 +13,6 @@ import java.util.List;
 import com.mysql.jdbc.Statement;
 
 import br.com.bom.sangue.config.DatabaseConnection;
-import br.com.bom.sangue.entities.Address;
 import br.com.bom.sangue.entities.Administrator;
 import br.com.bom.sangue.entities.News;
 
@@ -32,6 +33,8 @@ public class NewsDAO {
 		statement = createStatement(statement, news);
 		
 		statement.execute();
+
+		statement.close();
 		
 		return news;
 	}
@@ -47,6 +50,8 @@ public class NewsDAO {
 		statement.setLong(5, news.getId());
 		
 		statement.executeUpdate();
+
+		statement.close();
 		
 		return news;
 	}
@@ -82,9 +87,12 @@ public class NewsDAO {
 	}	
 
 	private PreparedStatement createStatement (PreparedStatement statement, News news) throws SQLException {
+		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		String createdAt = dateFormat.format(news.getCreatedAt());
+
 		statement.setString(1, news.getTitle());
 		statement.setString(2, news.getText());
-		statement.setString(3, news.getCreatedAt().toString());
+		statement.setString(3, createdAt);
 		statement.setLong(4, news.getAdministrator().getId());
 		
 		return statement;
