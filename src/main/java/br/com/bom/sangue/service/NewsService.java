@@ -34,7 +34,8 @@ public class NewsService {
 		LOGGER.info("> Created at {}", news.getCreatedAt());
 		LOGGER.info("> Administrator {}", news.getAdministrator().getId());
 		
-		return newsDAO.update(news);
+		newsDAO.update(news);
+		return news;
 	}
 	
 	public List<News> findAllOrderByCreatedAt () throws ClassNotFoundException, SQLException {

@@ -120,9 +120,9 @@ public class UserDAO {
         
         user.setId(result.getLong("id"));
 
-         statment.close();
+        statment.close();
 
-         return user.getId();
+        return user.getId();
     	
     }
 

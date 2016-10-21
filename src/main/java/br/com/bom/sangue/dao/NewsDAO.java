@@ -10,11 +10,15 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import br.com.bom.sangue.entities.User;
+import br.com.bom.sangue.service.NewsService;
 import com.mysql.jdbc.Statement;
 
 import br.com.bom.sangue.config.DatabaseConnection;
 import br.com.bom.sangue.entities.Administrator;
 import br.com.bom.sangue.entities.News;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class NewsDAO {
 	
@@ -23,6 +27,8 @@ public class NewsDAO {
 	private String updateQuery = "UPDATE news SET title = ?, text = ?, created_at = ?, administrator_id = ? WHERE id = ?";
 	
 	private String findAllOrderByCreatedAtQuery = "SELECT * FROM news ORDER BY created_at DESC";
+
+	private String findLastInsertedQuery = "SELECT MAX(id) AS id FROM news";
 	
 	public News create (News news) throws ClassNotFoundException, SQLException {
 		DatabaseConnection database = DatabaseConnection.getInstance();
@@ -35,6 +41,8 @@ public class NewsDAO {
 		statement.execute();
 
 		statement.close();
+
+		news.setId(findLastInserted());
 		
 		return news;
 	}
@@ -44,7 +52,7 @@ public class NewsDAO {
 		Connection connection = database.getConnection();
 		
 		PreparedStatement statement = connection.prepareStatement(updateQuery);
-		
+
 		statement = createStatement(statement, news);
 		
 		statement.setLong(5, news.getId());
@@ -96,6 +104,26 @@ public class NewsDAO {
 		statement.setLong(4, news.getAdministrator().getId());
 		
 		return statement;
+	}
+
+	private Long findLastInserted () throws ClassNotFoundException, SQLException {
+		News news = new News();
+
+		DatabaseConnection dataBase = DatabaseConnection.getInstance();
+		Connection connection = dataBase.getConnection();
+
+		PreparedStatement statment = connection.prepareStatement(findLastInsertedQuery);
+
+		ResultSet result  = statment.executeQuery();
+
+		result.next();
+
+		news.setId(result.getLong("id"));
+
+		statment.close();
+
+		return news.getId();
+
 	}
 
 }
