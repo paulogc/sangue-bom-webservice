@@ -5,6 +5,8 @@ import br.com.bom.sangue.service.NewsService;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.SQLException;
+import java.util.Date;
+import java.util.List;
 
 
 @RestController
@@ -25,4 +27,9 @@ public class NewsController {
         return newsService.update(news);
     }
 
+    @GetMapping(value = "/list-all")
+    @ResponseBody
+    public List<News> findAllOrderByCreatedAt () throws ClassNotFoundException, SQLException {
+        return newsService.findAllOrderByCreatedAt();
+    }
 }
