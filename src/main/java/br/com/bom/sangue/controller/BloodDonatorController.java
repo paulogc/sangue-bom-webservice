@@ -41,7 +41,7 @@ public class BloodDonatorController {
     public String delete (@RequestBody BloodDonator bloodDonator) throws ClassNotFoundException, SQLException {
         bloodDonatorService.delete(bloodDonator);
 
-        return("Successfuly deleted");
+        return("Successfully deleted");
     }
 
 }
