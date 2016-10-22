@@ -3,6 +3,7 @@ package br.com.bom.sangue.dao;
 
 import br.com.bom.sangue.config.DatabaseConnection;
 import br.com.bom.sangue.entities.Address;
+import br.com.bom.sangue.entities.Telephone;
 import br.com.bom.sangue.entities.User;
 
 import java.sql.*;
@@ -13,11 +14,13 @@ import org.flywaydb.core.internal.util.DateUtils;
 
 public class UserDAO {
 
-    private String insertQuery = "INSERT INTO user (name, email, birthdate, address_id) VALUES(?, ?, ?, ?)";
+    private String insertQuery = "INSERT INTO user (name, email, birth_date, address_id, telephone_id)" +
+            " VALUES(?, ?, ?, ?, ?)";
 
     private String findOneByIdQuery = "SELECT * FROM user WHERE id = ?";
 
-    private String updateQuery = "UPDATE user SET name = ?, email = ?, birthdate = ?, address_id = ? WHERE id = ?";
+    private String updateQuery = "UPDATE user SET name = ?, email = ?, birth_date = ?," +
+            " address_id = ?, telephone_id = ? WHERE id = ?";
 
     private String deleteQuery = "DELETE FROM user WHERE id = ?";
     
@@ -43,6 +46,7 @@ public class UserDAO {
     public User findOneById(Long id) throws ClassNotFoundException, SQLException {
         User user = new User();
         Address address = new Address();
+        Telephone telephone = new Telephone();
 
         DatabaseConnection dataBase = DatabaseConnection.getInstance();
         Connection connection = dataBase.getConnection();
@@ -57,9 +61,13 @@ public class UserDAO {
             user.setId(result.getLong("id"));
             user.setName(result.getString("name"));
             user.setEmail(result.getString("email"));
-            user.setBirthdate(result.getDate("birthdate"));
+            user.setBirthDate(result.getDate("birth_date"));
+
             address.setId(result.getLong("address_id"));
+            telephone.setId(result.getLong("telephone_id"));
+
             user.setAddress(address);
+            user.setTelephone(telephone);
         }
 
         statement.close();
@@ -74,7 +82,7 @@ public class UserDAO {
         PreparedStatement statement = connection.prepareStatement(updateQuery);
 
         statement = createStatement(statement, user);
-        statement.setLong(5, user.getId());
+        statement.setLong(6, user.getId());
 
         statement.executeUpdate();
 
@@ -96,12 +104,13 @@ public class UserDAO {
 
     private PreparedStatement createStatement(PreparedStatement statement, User user) throws SQLException {
     	DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-    	String birthdate = dateFormat.format(user.getBirthdate());
+    	String birthDate = dateFormat.format(user.getBirthDate());
     	    	
         statement.setString(1, user.getName());
         statement.setString(2, user.getEmail());
-        statement.setString(3, birthdate);
+        statement.setString(3, birthDate);
         statement.setLong(4, user.getAddress().getId());
+        statement.setLong(5, user.getTelephone().getId());
 
         return statement;
     }

@@ -7,26 +7,29 @@ public class User {
     private Long id;
     private String name;
     private String email;
-    private Date birthdate;
+    private Date birthDate;
     private Address address;
-    
+    private Telephone telephone;
+
     public User () {
     	
     }
     
-    public User (String name, String email, Date birthdate, Address address) {
+    public User (String name, String email, Date birthDate, Address address, Telephone telephone) {
     	this.name = name;
     	this.email = email;
-    	this.birthdate = birthdate;
+    	this.birthDate = birthDate;
     	this.address = address;
+        this.telephone = telephone;
     }
 
-    public User (Long id, String name, String email, Date birthdate, Address address) {
+    public User (Long id, String name, String email, Date birthDate, Address address, Telephone telephone) {
         this.id = id;
         this.name = name;
         this.email = email;
-        this.birthdate = birthdate;
+        this.birthDate = birthDate;
         this.address = address;
+        this.telephone = telephone;
     }
 
     public Long getId() {
@@ -53,12 +56,12 @@ public class User {
         this.name = name;
     }
 
-    public Date getBirthdate() {
-        return birthdate;
+    public Date getBirthDate() {
+        return birthDate;
     }
 
-    public void setBirthdate(Date birthdate) {
-        this.birthdate = birthdate;
+    public void setBirthDate(Date birthDate) {
+        this.birthDate = birthDate;
     }
 
     public Address getAddress() {
@@ -69,4 +72,11 @@ public class User {
         this.address = address;
     }
 
+    public Telephone getTelephone() {
+        return telephone;
+    }
+
+    public void setTelephone(Telephone telephone) {
+        this.telephone = telephone;
+    }
 }

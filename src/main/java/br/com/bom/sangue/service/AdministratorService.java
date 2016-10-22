@@ -28,7 +28,7 @@ public class AdministratorService {
 
 
         User user = new User(administrator.getName(), administrator.getEmail(),
-                administrator.getBirthdate(), administrator.getAddress());
+                administrator.getBirthDate(), administrator.getAddress(), administrator.getTelephone());
 
         user = userService.create(user);
 
@@ -46,8 +46,9 @@ public class AdministratorService {
 	    administrator = new Administrator(user.getId(), 
 	    		user.getName(), 
 	    		user.getEmail(), 
-	    		user.getBirthdate(),
-	    		user.getAddress(), 
+	    		user.getBirthDate(),
+	    		user.getAddress(),
+				user.getTelephone(),
 	    		administrator.getPassword()
 	    		);
 	    
@@ -60,7 +61,7 @@ public class AdministratorService {
 	        LOGGER.info("> Password {}", administrator.getPassword());
 	        
 	        User user = new User(administrator.getId(), administrator.getName(), administrator.getEmail(),
-	        		administrator.getBirthdate(), administrator.getAddress());
+	        		administrator.getBirthDate(), administrator.getAddress(), administrator.getTelephone());
 
 	        user = userService.update(user);
 
@@ -73,7 +74,7 @@ public class AdministratorService {
 	        LOGGER.info("Deleting Administrator");
 
 	        User user = new User(administrator.getId(), administrator.getName(), administrator.getEmail(),
-	        		administrator.getBirthdate(), administrator.getAddress());
+	        		administrator.getBirthDate(), administrator.getAddress(), administrator.getTelephone());
 
 	        administratorDAO.delete(administrator.getId());
 

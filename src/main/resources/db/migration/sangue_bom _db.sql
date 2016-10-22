@@ -15,14 +15,25 @@ create table address(
 	primary key (id)
 );
 
+create table telephone(
+	id bigint unsigned not null auto_increment,
+	ddi int not null,
+	ddd int not null,
+	number varchar(20) not null,
+	type varchar(20) not null,
+	primary key (id)
+);
+
 create table user(
 	id bigint unsigned not null auto_increment,
 	name varchar(255) not null,
 	email varchar(255) not null,
-	birthdate date not null,
+	birth_date date not null,
 	address_id bigint unsigned not null,
+	telephone_id bigint unsigned not null,
 	primary key (id),
-	foreign key (address_id) references address(id)
+	foreign key (address_id) references address(id),
+	foreign key (telephone_id) references telephone(id)
 );
 
 create table blood_donator(
@@ -48,15 +59,6 @@ create table super_administrator(
 	foreign key (administrator_id) references administrator(user_id)
 );
 
-create table telephone(
-	id bigint unsigned not null auto_increment,
-	user_id bigint unsigned not null,
-	ddi int not null,
-	ddd int not null,
-	number varchar(20),
-	primary key (id),
-	foreign key (user_id) references user(id)
-);
 
 create table news(
 	id bigint unsigned not null auto_increment,

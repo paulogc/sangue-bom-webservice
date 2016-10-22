@@ -11,9 +11,9 @@ public class BloodDonator extends User {
 
     public BloodDonator() {}
 
-    public BloodDonator(Long id, String name, String email, Date birthdate, Address address,
+    public BloodDonator(Long id, String name, String email, Date birthdate, Address address, Telephone telephone,
                         String bloodType, String bloodFactor, String CPF, String nickname) {
-        super(id, name, email, birthdate, address);
+        super(id, name, email, birthdate, address, telephone);
         this.bloodType = bloodType;
         this.bloodFactor = bloodFactor;
         this.CPF = CPF;

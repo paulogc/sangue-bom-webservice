@@ -13,6 +13,7 @@ public class UserService {
 
     UserDAO userDao = new UserDAO();
     AddressService addressService = new AddressService();
+    TelephoneService telephoneService = new TelephoneService();
 
     private static final Logger LOGGER = LoggerFactory.getLogger(UserService.class);
 
@@ -20,11 +21,13 @@ public class UserService {
         LOGGER.info("Saving user in database");
 
         user.setAddress(addressService.create(user.getAddress()));
+        user.setTelephone(telephoneService.create(user.getTelephone()));
 
         LOGGER.info("> Name {}", user.getName());
         LOGGER.info("> Email {}", user.getEmail());
-        LOGGER.info("> Birthdate {}", user.getBirthdate());
-        LOGGER.info("> Address_d {}", user.getAddress().getId());
+        LOGGER.info("> Birthdate {}", user.getBirthDate());
+        LOGGER.info("> Address_id {}", user.getAddress().getId());
+        LOGGER.info("> Telephone_id {}", user.getTelephone().getId());
 
         return userDao.create(user);
     }
@@ -37,6 +40,7 @@ public class UserService {
 
         user =  userDao.findOneById(id);
         user.setAddress(addressService.findOneById(user.getAddress().getId()));
+        user.setTelephone(telephoneService.findOneById(user.getTelephone().getId()));
 
         return user;
     }
@@ -45,11 +49,13 @@ public class UserService {
         LOGGER.info("Updating user");
 
         addressService.update(user.getAddress());
+        telephoneService.update(user.getTelephone());
 
         LOGGER.info("> Name {}", user.getName());
         LOGGER.info("> Email {}", user.getEmail());
-        LOGGER.info("> Birthdate {}", user.getBirthdate());
+        LOGGER.info("> Birthdate {}", user.getBirthDate());
         LOGGER.info("> Address_id {}", user.getAddress().getId());
+        LOGGER.info("> Telephone {}", user.getTelephone().getId());
 
         return userDao.update(user);
     }
@@ -61,6 +67,7 @@ public class UserService {
         userDao.delete(user.getId());
 
         addressService.delete(user.getAddress().getId());
+        telephoneService.delete(user.getTelephone().getId());
     }
 
 }

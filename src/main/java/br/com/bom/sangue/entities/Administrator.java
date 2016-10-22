@@ -7,9 +7,9 @@ public class Administrator extends User {
 
     public Administrator() {}
 
-    public Administrator(Long id, String name, String email, Date birthdate, Address address,
+    public Administrator(Long id, String name, String email, Date birthdate, Address address, Telephone telephone,
                         String password) {
-        super(id, name, email, birthdate, address);
+        super(id, name, email, birthdate, address, telephone);
         this.password = password;
     }
     

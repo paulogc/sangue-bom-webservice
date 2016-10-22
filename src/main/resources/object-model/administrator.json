@@ -2,9 +2,9 @@
   "id": null,
   "name": "Lucas Viado",
   "email": "lucasviadinho@gmail.com",
-  "birthdate": 1476835200,
+  "birthDate": 1476835200,
   "address": {
-    "id": 1,
+    "id": null,
     "street": "Rua Maristela T. Custodio",
     "number": 1258,
     "neighborhood": "Cidade Aracy",
@@ -14,6 +14,13 @@
     "state": "São Paulo",
     "latitude": 3,
     "longitude": 4
+  },
+  "telephone": {
+    "id": null,
+    "ddi": 55,
+    "ddd": 16,
+    "number": "992416152",
+    "type": "mobile"
   },
   "password": "1234"
 }

@@ -21,17 +21,16 @@ public class TelephoneService {
         LOGGER.info("> Type {}", telephone.getType());
         LOGGER.info("> Ddd {}", telephone.getDdd());
         LOGGER.info("> Ddi {}", telephone.getDdd());
-        LOGGER.info("> UserId {}", telephone.getUser().getId());
 
         return telephoneDAO.create(telephone);
     }
 
-    public List<Telephone> findOneById(Long id) throws ClassNotFoundException, SQLException {
+    public Telephone findOneById(Long id) throws ClassNotFoundException, SQLException {
         LOGGER.info("Geting one telephone by id");
 
         LOGGER.info("> Number {}", id);
 
-        return telephoneDAO.findAllByUserId(id);
+        return telephoneDAO.findOneById(id);
     }
 
     public Telephone update(Telephone telephone) throws  ClassNotFoundException, SQLException {
@@ -41,7 +40,6 @@ public class TelephoneService {
         LOGGER.info("> Type {}", telephone.getType());
         LOGGER.info("> Ddd {}", telephone.getDdd());
         LOGGER.info("> Ddi {}", telephone.getDdd());
-        LOGGER.info("> UserId {}", telephone.getUser().getId());
 
         return telephoneDAO.update(telephone);
     }
