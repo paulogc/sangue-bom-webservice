@@ -21,7 +21,7 @@ public class IntentDonationController {
 
     @GetMapping(value = "/find-all-by-user={user_id}")
     @ResponseBody
-    public List<IntentDonation> finsAllByUserId (@PathVariable("user_id") Long user_id) throws ClassNotFoundException, SQLException {
+    public List<IntentDonation> findAllByUserId (@PathVariable("user_id") Long user_id) throws ClassNotFoundException, SQLException {
         return intentDonationService.findAllByBloodDonatorId(user_id);
     }
 
@@ -31,6 +31,12 @@ public class IntentDonationController {
         return intentDonationService.findAllIntentDonation();
     }
 
+    @GetMapping(value = "/find-by-neighborhood={neighborhood}")
+    @ResponseBody
+    public List<IntentDonation> findByNeighborhood (@PathVariable("neighborhood") String neighborhood) throws ClassNotFoundException, SQLException {
+        return intentDonationService.findByNeighborhood(neighborhood);
+    }
+    
     @PutMapping(value = "/update")
     @ResponseBody
     public IntentDonation update (@RequestBody IntentDonation intentDonation) throws ClassNotFoundException, SQLException {

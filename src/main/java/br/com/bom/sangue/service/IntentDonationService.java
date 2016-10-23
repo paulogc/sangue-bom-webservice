@@ -54,6 +54,19 @@ public class IntentDonationService {
         return intentDonations;
     }
 
+    public List<IntentDonation> findByNeighborhood(String neighborhood) throws ClassNotFoundException, SQLException {
+        LOGGER.info("Finding all intent by neighborhood");
+
+        List<IntentDonation> intentDonations = intentDonationDAO.findByNeighborhood(neighborhood);
+
+        for (IntentDonation intentDonation : intentDonations) {
+
+            intentDonation.setBloodDonator(bloodDonatorService.findOneById(intentDonation.getBloodDonator().getId()));
+        }
+
+        return intentDonations;
+    }
+    
     public IntentDonation update(IntentDonation intentDonation) throws ClassNotFoundException, SQLException {
         LOGGER.info("Updating Intent Donation");
 
