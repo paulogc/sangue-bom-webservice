@@ -11,25 +11,32 @@ import java.util.List;
 public class IntentDonationService {
     IntentDonationDAO intentDonationDAO = new IntentDonationDAO();
 
+    BloodDonatorService bloodDonatorService = new BloodDonatorService();
+
     private static final Logger LOGGER = LoggerFactory.getLogger(IntentDonationService.class);
 
     public IntentDonation create(IntentDonation intentDonation) throws ClassNotFoundException, SQLException {
         LOGGER.info("Creating Intent Donation");
 
-        LOGGER.info("> CreatedDate {}", intentDonation.getCreatedDate());
+        LOGGER.info("> CreatedDate {}", intentDonation.getCreatedAt());
         LOGGER.info("> GrantDate {}", intentDonation.getGrantDate());
-        LOGGER.info("> Active {}", intentDonation.getActive());
+        LOGGER.info("> Status {}", intentDonation.getStatus());
         LOGGER.info("> BloodDonator {}", intentDonation.getBloodDonator().getId());
 
         return intentDonationDAO.create(intentDonation);
     }
 
     public IntentDonation findOneById(Long id) throws ClassNotFoundException, SQLException {
+        IntentDonation intentDonation;
         LOGGER.info("Find one by id");
 
         LOGGER.info("> Id {}", id);
 
-        return intentDonationDAO.findOneById(id);
+        intentDonation = intentDonationDAO.findOneById(id);
+
+        intentDonation.setBloodDonator(bloodDonatorService.findOneById(intentDonation.getBloodDonator().getId()));
+
+        return intentDonation;
     }
 
     public List<IntentDonation> findAllIntentDonation() throws ClassNotFoundException, SQLException {
@@ -43,9 +50,9 @@ public class IntentDonationService {
     public IntentDonation update(IntentDonation intentDonation) throws ClassNotFoundException, SQLException {
         LOGGER.info("Updating Intent Donation");
 
-        LOGGER.info("> CreatedDate {}", intentDonation.getCreatedDate());
+        LOGGER.info("> CreatedDate {}", intentDonation.getCreatedAt());
         LOGGER.info("> GrantDate {}", intentDonation.getGrantDate());
-        LOGGER.info("> Active {}", intentDonation.getActive());
+        LOGGER.info("> Status {}", intentDonation.getStatus());
         LOGGER.info("> BloodDonator {}", intentDonation.getBloodDonator().getId());
 
         return intentDonationDAO.update(intentDonation);

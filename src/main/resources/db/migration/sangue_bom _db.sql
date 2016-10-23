@@ -73,9 +73,9 @@ create table news(
 create table intent_donation(
 	id bigint unsigned not null auto_increment,
 	created_at date not null,
-	active boolean not null,
+	status int not null,
 	grant_date date not null,
-	blood_donator bigint unsigned not null,
+	blood_donator_id bigint unsigned not null,
 	primary key (id),
-	foreign key (blood_donator) references blood_donator(user_id)
+	foreign key (blood_donator_id) references blood_donator(user_id)
 );

@@ -4,23 +4,28 @@ package br.com.bom.sangue.dao;
 import br.com.bom.sangue.config.DatabaseConnection;
 import br.com.bom.sangue.entities.BloodDonator;
 import br.com.bom.sangue.entities.IntentDonation;
+import br.com.bom.sangue.entities.News;
 
 import java.sql.*;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
 public class IntentDonationDAO {
-    private String insertQuery = "INSERT INTO intent_donation (created_date, grant_date, active, blood_donator_id) " +
+    private String insertQuery = "INSERT INTO intent_donation (created_at, status, grant_date , blood_donator_id) " +
             "VALUES(?, ?, ?, ?)";
 
     private String findOneByIdQuery = "SELECT * FROM intent_donation WHERE id = ?";
 
     private String findAllIntentDonationQuery = "SELECT * FROM intent_donation";
 
-    private String updateQuery = "UPDATE intent_donation SET created_date = ?, grant_date = ?, active = ?, " +
+    private String updateQuery = "UPDATE intent_donation SET created_at = ?, status = ?, grant_date = ?, " +
             "blood_donator_id = ? WHERE id = ?";
 
     private String deleteQuery = "DELETE FROM intent_donation WHERE id = ?";
+
+    private String findLastInsertedQuery = "SELECT MAX(id) AS id FROM intent_donation";
 
     public IntentDonation create(IntentDonation intentDonation) throws ClassNotFoundException, SQLException {
         DatabaseConnection dataBase = DatabaseConnection.getInstance();
@@ -31,6 +36,8 @@ public class IntentDonationDAO {
 
         statement.execute();
         statement.close();
+        
+        intentDonation.setId(findLastInserted());
 
         return intentDonation;
     }
@@ -50,9 +57,9 @@ public class IntentDonationDAO {
 
         while (result.next()) {
             intentDonation.setId(result.getLong("id"));
-            intentDonation.setCreatedDate(result.getDate("created_date"));
+            intentDonation.setCreatedAt(result.getDate("created_at"));
+            intentDonation.setStatus(result.getInt("status"));
             intentDonation.setGrantDate(result.getDate("grant_date"));
-            intentDonation.setActive(result.getBoolean("active"));
             bloodDonator.setId(result.getLong("blood_donator_id"));
             intentDonation.setBloodDonator(bloodDonator);
         }
@@ -77,9 +84,9 @@ public class IntentDonationDAO {
             BloodDonator bloodDonator = new BloodDonator();
 
             intentDonation.setId(result.getLong("id"));
-            intentDonation.setCreatedDate(result.getDate("created_date"));
+            intentDonation.setCreatedAt(result.getDate("created_at"));
             intentDonation.setGrantDate(result.getDate("grant_date"));
-            intentDonation.setActive(result.getBoolean("active"));
+            intentDonation.setStatus(result.getInt("status"));
             bloodDonator.setId(result.getLong("blood_donator_id"));
             intentDonation.setBloodDonator(bloodDonator);
 
@@ -116,12 +123,37 @@ public class IntentDonationDAO {
         statement.close();
     }
 
-    private PreparedStatement createStatment(PreparedStatement statement, IntentDonation intentDonation) throws SQLException {
-        statement.setDate(1, (Date) intentDonation.getCreatedDate());
-        statement.setDate(2, (Date) intentDonation.getGrantDate());
-        statement.setBoolean(3, intentDonation.getActive());
+    private PreparedStatement createStatment(PreparedStatement statement, IntentDonation intentDonation)
+            throws SQLException {
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String createdAt = dateFormat.format(intentDonation.getCreatedAt());
+        String grantDate = dateFormat.format(intentDonation.getGrantDate());
+
+        statement.setString(1, createdAt);
+        statement.setInt(2, intentDonation.getStatus());
+        statement.setString(3, grantDate);
         statement.setLong(4, intentDonation.getBloodDonator().getId());
 
         return statement;
+    }
+
+    private Long findLastInserted () throws ClassNotFoundException, SQLException {
+        IntentDonation intentDonation = new IntentDonation();
+
+        DatabaseConnection dataBase = DatabaseConnection.getInstance();
+        Connection connection = dataBase.getConnection();
+
+        PreparedStatement statement = connection.prepareStatement(findLastInsertedQuery);
+
+        ResultSet result  = statement.executeQuery();
+
+        result.next();
+
+        intentDonation.setId(result.getLong("id"));
+
+        statement.close();
+
+        return intentDonation.getId();
+
     }
 }

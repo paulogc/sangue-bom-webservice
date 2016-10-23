@@ -5,8 +5,9 @@ import java.util.Date;
 
 public class IntentDonation {
     private Long id;
-    private Date createdDate;
-    private Boolean active;
+    private Date createdAt;
+    /* Status: 0 - canceled, 1 - to-do, 2 - done*/
+    private int status;
     private Date grantDate;
     private BloodDonator bloodDonator;
 
@@ -18,20 +19,20 @@ public class IntentDonation {
         this.id = id;
     }
 
-    public Date getCreatedDate() {
-        return createdDate;
+    public Date getCreatedAt() {
+        return createdAt;
     }
 
-    public void setCreatedDate(Date createdDate) {
-        this.createdDate = createdDate;
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
     }
 
-    public Boolean getActive() {
-        return active;
+    public int getStatus() {
+        return status;
     }
 
-    public void setActive(Boolean active) {
-        this.active = active;
+    public void setStatus(int status) {
+        this.status = status;
     }
 
     public Date getGrantDate() {

@@ -1,0 +1,35 @@
+{
+  "id": null,
+  "createdAt": 1476835200,
+  "status": 1,
+  "grantDate": 1476835200,
+  "bloodDonator": {
+    "id": 1,
+    "name": "Lucas Viado",
+    "email": "lucasviadinho@gmail.com",
+    "birthDate": 1476835200,
+    "address": {
+      "id": 1,
+      "street": "Rua Maristela T. Custodio",
+      "number": 1258,
+      "neighborhood": "Cidade Aracy",
+      "cep": "13573-026",
+      "complement": "Nada",
+      "city": "São Carlos",
+      "state": "São Paulo",
+      "latitude": 3,
+      "longitude": 4
+    },
+    "telephone": {
+      "id": 1,
+      "ddi": 55,
+      "ddd": 16,
+      "number": "992416152",
+      "type": "mobile"
+    },
+    "bloodType": "O",
+    "bloodFactor": "+",
+    "cpf": "12312312321",
+    "nickname": "luGay"
+  }
+}
