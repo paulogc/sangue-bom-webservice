@@ -26,17 +26,19 @@ public class IntentDonationService {
         return intentDonationDAO.create(intentDonation);
     }
 
-    public IntentDonation findOneById(Long id) throws ClassNotFoundException, SQLException {
-        IntentDonation intentDonation;
+    public List<IntentDonation> findAllByBloodDonatorId(Long id) throws ClassNotFoundException, SQLException {
         LOGGER.info("Find one by id");
 
         LOGGER.info("> Id {}", id);
 
-        intentDonation = intentDonationDAO.findOneById(id);
+        List<IntentDonation> intentDonations = intentDonationDAO.findAllByBloodDonatorId(id);
 
-        intentDonation.setBloodDonator(bloodDonatorService.findOneById(intentDonation.getBloodDonator().getId()));
+        for (IntentDonation intentDonation : intentDonations) {
 
-        return intentDonation;
+            intentDonation.setBloodDonator(bloodDonatorService.findOneById(intentDonation.getBloodDonator().getId()));
+        }
+
+        return intentDonations;
     }
 
     public List<IntentDonation> findAllIntentDonation() throws ClassNotFoundException, SQLException {

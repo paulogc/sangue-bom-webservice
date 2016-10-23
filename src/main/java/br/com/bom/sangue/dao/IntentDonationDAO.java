@@ -16,7 +16,7 @@ public class IntentDonationDAO {
     private String insertQuery = "INSERT INTO intent_donation (created_at, status, grant_date , blood_donator_id) " +
             "VALUES(?, ?, ?, ?)";
 
-    private String findOneByIdQuery = "SELECT * FROM intent_donation WHERE id = ?";
+    private String findAllByUserId = "SELECT * FROM intent_donation WHERE blood_donator_id = ?";
 
     private String findAllIntentDonationQuery = "SELECT * FROM intent_donation";
 
@@ -36,37 +36,41 @@ public class IntentDonationDAO {
 
         statement.execute();
         statement.close();
-        
+
         intentDonation.setId(findLastInserted());
 
         return intentDonation;
     }
 
-    public IntentDonation findOneById(Long id) throws ClassNotFoundException, SQLException {
-        IntentDonation intentDonation = new IntentDonation();
+    public List<IntentDonation> findAllByBloodDonatorId(Long id) throws ClassNotFoundException, SQLException {
+        List<IntentDonation> intentDonations = new ArrayList<>();
+        IntentDonation intentDonation;
         BloodDonator bloodDonator = new BloodDonator();
 
         DatabaseConnection dataBase = DatabaseConnection.getInstance();
         Connection connection = dataBase.getConnection();
 
-        PreparedStatement statement = connection.prepareStatement(findOneByIdQuery);
+        PreparedStatement statement = connection.prepareStatement(findAllByUserId);
 
         statement.setLong(1, id);
 
         ResultSet result = statement.executeQuery();
 
         while (result.next()) {
+            intentDonation = new IntentDonation();
             intentDonation.setId(result.getLong("id"));
             intentDonation.setCreatedAt(result.getDate("created_at"));
             intentDonation.setStatus(result.getInt("status"));
             intentDonation.setGrantDate(result.getDate("grant_date"));
             bloodDonator.setId(result.getLong("blood_donator_id"));
             intentDonation.setBloodDonator(bloodDonator);
+
+            intentDonations.add(intentDonation);
         }
 
         statement.close();
 
-        return intentDonation;
+        return intentDonations;
     }
 
     public List<IntentDonation> findAllIntentDonation() throws ClassNotFoundException, SQLException {
