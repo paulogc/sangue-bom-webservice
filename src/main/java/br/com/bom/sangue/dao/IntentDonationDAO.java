@@ -20,8 +20,7 @@ public class IntentDonationDAO {
 
     private String findAllIntentDonationQuery = "SELECT * FROM intent_donation";
 
-    private String updateQuery = "UPDATE intent_donation SET created_at = ?, status = ?, grant_date = ?, " +
-            "blood_donator_id = ? WHERE id = ?";
+    private String updateQuery = "UPDATE intent_donation SET status = ?, grant_date = ? WHERE id = ?";
 
     private String deleteQuery = "DELETE FROM intent_donation WHERE id = ?";
 
@@ -45,7 +44,7 @@ public class IntentDonationDAO {
     public List<IntentDonation> findAllByBloodDonatorId(Long id) throws ClassNotFoundException, SQLException {
         List<IntentDonation> intentDonations = new ArrayList<>();
         IntentDonation intentDonation;
-        BloodDonator bloodDonator = new BloodDonator();
+        BloodDonator bloodDonator;
 
         DatabaseConnection dataBase = DatabaseConnection.getInstance();
         Connection connection = dataBase.getConnection();
@@ -58,6 +57,8 @@ public class IntentDonationDAO {
 
         while (result.next()) {
             intentDonation = new IntentDonation();
+            bloodDonator = new BloodDonator();
+
             intentDonation.setId(result.getLong("id"));
             intentDonation.setCreatedAt(result.getDate("created_at"));
             intentDonation.setStatus(result.getInt("status"));
@@ -75,6 +76,8 @@ public class IntentDonationDAO {
 
     public List<IntentDonation> findAllIntentDonation() throws ClassNotFoundException, SQLException {
         List<IntentDonation> intentDonationList = new ArrayList<>();
+        IntentDonation intentDonation;
+        BloodDonator bloodDonator;
 
         DatabaseConnection dataBase = DatabaseConnection.getInstance();
         Connection connection = dataBase.getConnection();
@@ -84,8 +87,8 @@ public class IntentDonationDAO {
         ResultSet result = statement.executeQuery();
 
         while (result.next()) {
-            IntentDonation intentDonation = new IntentDonation();
-            BloodDonator bloodDonator = new BloodDonator();
+            intentDonation = new IntentDonation();
+            bloodDonator = new BloodDonator();
 
             intentDonation.setId(result.getLong("id"));
             intentDonation.setCreatedAt(result.getDate("created_at"));
@@ -104,10 +107,16 @@ public class IntentDonationDAO {
         DatabaseConnection dataBase = DatabaseConnection.getInstance();
         Connection connection = dataBase.getConnection();
 
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String grantDate = dateFormat.format(intentDonation.getGrantDate());
+
         PreparedStatement statement = connection.prepareStatement(updateQuery);
 
-        statement = createStatment(statement, intentDonation);
-        statement.setLong(5, intentDonation.getId());
+        statement.setInt(1, intentDonation.getStatus());
+        statement.setString(2, grantDate);
+        statement.setLong(3, intentDonation.getId());
+
+        statement.executeUpdate();
 
         statement.close();
 

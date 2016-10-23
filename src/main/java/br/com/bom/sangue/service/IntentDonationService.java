@@ -44,9 +44,14 @@ public class IntentDonationService {
     public List<IntentDonation> findAllIntentDonation() throws ClassNotFoundException, SQLException {
         LOGGER.info("Finding all intent conations");
 
-        List<IntentDonation> intentDonationList = intentDonationDAO.findAllIntentDonation();
+        List<IntentDonation> intentDonations = intentDonationDAO.findAllIntentDonation();
 
-        return intentDonationList;
+        for (IntentDonation intentDonation : intentDonations) {
+
+            intentDonation.setBloodDonator(bloodDonatorService.findOneById(intentDonation.getBloodDonator().getId()));
+        }
+
+        return intentDonations;
     }
 
     public IntentDonation update(IntentDonation intentDonation) throws ClassNotFoundException, SQLException {
@@ -56,6 +61,8 @@ public class IntentDonationService {
         LOGGER.info("> GrantDate {}", intentDonation.getGrantDate());
         LOGGER.info("> Status {}", intentDonation.getStatus());
         LOGGER.info("> BloodDonator {}", intentDonation.getBloodDonator().getId());
+
+        intentDonation.setBloodDonator(bloodDonatorService.findOneById(intentDonation.getBloodDonator().getId()));
 
         return intentDonationDAO.update(intentDonation);
     }
