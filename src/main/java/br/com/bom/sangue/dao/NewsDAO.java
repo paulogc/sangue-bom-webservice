@@ -77,7 +77,8 @@ public class NewsDAO {
 		while (resultSet.next()) {
 			News news = new News();
 			Administrator administrator = new Administrator();
-			
+
+			news.setTitle(resultSet.getString("title"));
 			news.setId(resultSet.getLong("id"));
 			news.setText(resultSet.getString("text"));
 			news.setCreatedAt(resultSet.getDate("created_at"));
