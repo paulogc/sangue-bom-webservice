@@ -12,6 +12,7 @@ import br.com.bom.sangue.entities.News;
 public class NewsService {
 	
 	NewsDAO newsDAO = new NewsDAO();
+	AdministratorService administratorService = new AdministratorService();
 	
 	private static final Logger LOGGER = LoggerFactory.getLogger(NewsService.class);
 	
@@ -40,8 +41,13 @@ public class NewsService {
 	
 	public List<News> findAllOrderByCreatedAt () throws ClassNotFoundException, SQLException {
 		LOGGER.info("Find all order by created at");
-		
-		return newsDAO.findAllOrderByCreatedAt();
+
+		List<News> listNews = newsDAO.findAllOrderByCreatedAt();
+
+		for (News news: listNews) {
+			news.setAdministrator(administratorService.findOneById(news.getAdministrator().getId()));
+		}
+		return listNews;
 	}
 	
 }
