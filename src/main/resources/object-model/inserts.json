@@ -1,0 +1,323 @@
+//administrator
+
+{
+  "id": null,
+  "name": "Nathan Almeida",
+  "email": "nathan_c_almeida@a-qualitybrasil.com.br",
+  "birthDate": 781315200,
+  "address": {
+    "id": null,
+    "street": "Rua Marcolino Lopes Barreto",
+    "number": 739,
+    "neighborhood": "Vila Costa do Sol",
+    "cep": "13566-210",
+    "complement": "",
+    "city": "São Carlos",
+    "state": "São Paulo",
+    "latitude": -22.0216046,
+    "longitude": -47.8818254
+  },
+  "telephone": {
+    "id": null,
+    "ddi": 55,
+    "ddd": 16,
+    "number": "985033809",
+    "type": "mobile"
+  },
+  "password": "cIHr7PLAQg"
+}
+
+{
+  "id": null,
+  "name": "Giovanni Costa",
+  "email": "giovanni-murilo84@rocketmail.com",
+  "birthDate": 510278400,
+  "address": {
+    "id": null,
+    "street": "Rua Olga Litrenta Desidera",
+    "number": 247,
+    "neighborhood": "Jardim de Cresci",
+    "cep": "13571-610",
+    "complement": "",
+    "city": "São Carlos",
+    "state": "São Paulo",
+    "latitude": -22.0298926,
+    "longitude": -47.8608248
+  },
+  "telephone": {
+    "id": null,
+    "ddi": 55,
+    "ddd": 16,
+    "number": "987354717",
+    "type": "mobile"
+  },
+  "password": "9pB0OHy095"
+}
+
+//blood_donator
+
+{
+  "id": null,
+  "name": "Pedro Moura",
+  "email": "pedro-hugo86@homail.com",
+  "birthDate": 518745600,
+  "address": {
+    "id": null,
+    "street": "Avenida Vicente Laurito",
+    "number": 68,
+    "neighborhood": "Cidade Aracy",
+    "cep": "13573-005",
+    "complement": "",
+    "city": "São Carlos",
+    "state": "São Paulo",
+    "latitude": -22.0600029,
+    "longitude": -47.8941562
+  },
+  "telephone": {
+    "id": null,
+    "ddi": 55,
+    "ddd": 16,
+    "number": "986939706",
+    "type": "mobile"
+  },
+  "bloodType": "O",
+  "bloodFactor": "-",
+  "cpf": "91799183874",
+  "nickname": "pedro_moura"
+}
+
+{
+  "id": null,
+  "name": "Kevin Ryan Almeida",
+  "email": "kevin_r_almeida@adherminer.com.br",
+  "birthDate": 534124800,
+  "address": {
+    "id": null,
+    "street": "Avenida Salgado Filho",
+    "number": 916,
+    "neighborhood": "Vila Marina",
+    "cep": "13566-350",
+    "complement": "",
+    "city": "São Carlos",
+    "state": "São Paulo",
+    "latitude": -21.996953,
+    "longitude": -47.8900133
+  },
+  "telephone": {
+    "id": null,
+    "ddi": 55,
+    "ddd": 16,
+    "number": "982438330",
+    "type": "mobile"
+  },
+  "bloodType": "B",
+  "bloodFactor": "-",
+  "cpf": "45482134814",
+  "nickname": "kevin_ryan"
+}
+
+{
+  "id": null,
+  "name": "Sarah Olivia Campos",
+  "email": "sarah_o_campos@sectron.com.br",
+  "birthDate": 335750400,
+  "address": {
+    "id": null,
+    "street": "Rua Antônio Spaziani",
+    "number": 228,
+    "neighborhood": "Jardim Real",
+    "cep": "13567-330",
+    "complement": "",
+    "city": "São Carlos",
+    "state": "São Paulo",
+    "latitude": -22.0031802,
+    "longitude": -47.8718474
+  },
+  "telephone": {
+    "id": null,
+    "ddi": 55,
+    "ddd": 16,
+    "number": "996787180",
+    "type": "mobile"
+  },
+  "bloodType": "A",
+  "bloodFactor": "+",
+  "cpf": "86921893839",
+  "nickname": "sarah_campos"
+}
+
+//intent-donations
+
+{
+  "id": null,
+  "createdAt": 1477425622,
+  "status": 1,
+  "bloodDonator": {
+    "id": 5,
+	"name": "Sarah Olivia Campos",
+	"email": "sarah_o_campos@sectron.com.br",
+	"birthDate": 335750400,
+	"address": {
+	  "id": 5,
+	  "street": "Rua Antônio Spaziani",
+      "number": 228,
+      "neighborhood": "Jardim Real",
+      "cep": "13567-330",
+      "complement": "",
+      "city": "São Carlos",
+      "state": "São Paulo",
+      "latitude": -22.0031802,
+      "longitude": -47.8718474
+    },
+    "telephone": {
+      "id": 5,
+      "ddi": 55,
+      "ddd": 16,
+      "number": "996787180",
+      "type": "mobile"
+    },
+    "bloodType": "A",
+    "bloodFactor": "+",
+    "cpf": "86921893839",
+    "nickname": "sarah_campos"
+  }
+}
+
+{
+  "id": null,
+  "createdAt": 1477425622,
+  "status": 2,
+  "grantDate": 1477425622,
+  "bloodDonator": {
+    "id": 3,
+    "name": "Pedro Moura",
+    "email": "pedro-hugo86@homail.com",
+    "birthDate": 518745600,
+    "address": {
+      "id": 3,
+      "street": "Avenida Vicente Laurito",
+      "number": 68,
+      "neighborhood": "Cidade Aracy",
+      "cep": "13573-005",
+      "complement": "",
+      "city": "São Carlos",
+      "state": "São Paulo",
+      "latitude": -22.0600029,
+      "longitude": -47.8941562
+    },
+    "telephone": {
+      "id": 3,
+      "ddi": 55,
+      "ddd": 16,
+      "number": "986939706",
+      "type": "mobile"
+    },
+    "bloodType": "O",
+    "bloodFactor": "-",
+    "cpf": "91799183874",
+    "nickname": "pedro_moura"
+  }
+}
+
+{
+  "id": null,
+  "createdAt": 1477425622,
+  "status": 0,
+  "bloodDonator": {
+    "id": 4,
+  "name": "Kevin Ryan Almeida",
+  "email": "kevin_r_almeida@adherminer.com.br",
+  "birthDate": 534124800,
+  "address": {
+    "id": 4,
+    "street": "Avenida Salgado Filho",
+    "number": 916,
+    "neighborhood": "Vila Marina",
+    "cep": "13566-350",
+    "complement": "",
+    "city": "São Carlos",
+    "state": "São Paulo",
+    "latitude": -21.996953,
+    "longitude": -47.8900133
+  },
+  "telephone": {
+    "id": 4,
+    "ddi": 55,
+    "ddd": 16,
+    "number": "982438330",
+    "type": "mobile"
+  },
+  "bloodType": "B",
+  "bloodFactor": "-",
+  "cpf": "45482134814",
+  "nickname": "kevin_ryan"
+  }
+}
+
+//news
+
+{
+  "id": null,
+  "title": "Banco de Sangue opera no limite",
+  "text": "Todo sangue coletado será submetido, a exames sorológicos pelo Ministério da Saúde. Caso ocorram resultados alterados, o doador será por carta ou outro meio para repetir os seus exames. Se isso acontecer não deixe de comparecer ao nosso serviço de esclarecimentos e/ou para repetir os exames, pois só assim voçê poderá ser liberado para doar sangue novamente.",
+  "createdAt": 1476835200,
+  "administrator": {
+      "id": 1,
+  "name": "Nathan Almeida",
+  "email": "nathan_c_almeida@a-qualitybrasil.com.br",
+  "birthDate": 781315200,
+  "address": {
+    "id": 1,
+    "street": "Rua Marcolino Lopes Barreto",
+    "number": 739,
+    "neighborhood": "Vila Costa do Sol",
+    "cep": "13566-210",
+    "complement": "",
+    "city": "São Carlos",
+    "state": "São Paulo",
+    "latitude": -22.0216046,
+    "longitude": -47.8818254
+  },
+  "telephone": {
+    "id": 1,
+    "ddi": 55,
+    "ddd": 16,
+    "number": "985033809",
+    "type": "mobile"
+  },
+  "password": "cIHr7PLAQg"
+  }
+}
+
+{
+  "id": null,
+  "title": "Lorem Ipsum",
+  "text": "lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum",
+  "createdAt": 1476835200,
+  "administrator": {
+      "id": 2,
+  "name": "Giovanni Costa",
+  "email": "giovanni-murilo84@rocketmail.com",
+  "birthDate": 510278400,
+  "address": {
+    "id": 2,
+    "street": "Rua Olga Litrenta Desidera",
+    "number": 247,
+    "neighborhood": "Jardim de Cresci",
+    "cep": "13571-610",
+    "complement": "",
+    "city": "São Carlos",
+    "state": "São Paulo",
+    "latitude": -22.0298926,
+    "longitude": -47.8608248
+  },
+  "telephone": {
+    "id": 2,
+    "ddi": 55,
+    "ddd": 16,
+    "number": "987354717",
+    "type": "mobile"
+  },
+  "password": "9pB0OHy095"
+  }
+}
