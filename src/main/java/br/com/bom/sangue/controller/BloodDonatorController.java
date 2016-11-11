@@ -29,16 +29,16 @@ public class BloodDonatorController {
         return (bloodDonatorService.findOneById(id));
     }
 
-    @PutMapping("/update")
+    @PutMapping("/{id}")
     @ResponseBody
-    public BloodDonator update (@RequestBody BloodDonator bloodDonator) throws
+    public BloodDonator update (@PathVariable("id") Long id, @RequestBody BloodDonator bloodDonator) throws
             ClassNotFoundException, SQLException {
         return (bloodDonatorService.update(bloodDonator));
     }
 
-    @DeleteMapping("/delete")
+    @DeleteMapping("/{id}")
     @ResponseBody
-    public String delete (@RequestBody BloodDonator bloodDonator) throws ClassNotFoundException, SQLException {
+    public String delete (@PathVariable("id") Long id, @RequestBody BloodDonator bloodDonator) throws ClassNotFoundException, SQLException {
         bloodDonatorService.delete(bloodDonator);
 
         return("Successfully deleted");
