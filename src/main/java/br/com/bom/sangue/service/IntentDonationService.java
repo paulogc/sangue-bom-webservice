@@ -1,6 +1,7 @@
 package br.com.bom.sangue.service;
 
 import br.com.bom.sangue.dao.IntentDonationDAO;
+import br.com.bom.sangue.entities.BloodDonator;
 import br.com.bom.sangue.entities.IntentDonation;
 import br.com.bom.sangue.entities.RankingDonations;
 
@@ -24,6 +25,14 @@ public class IntentDonationService {
         LOGGER.info("> GrantDate {}", intentDonation.getGrantDate());
         LOGGER.info("> Status {}", intentDonation.getStatus());
         LOGGER.info("> BloodDonator {}", intentDonation.getBloodDonator().getId());
+
+        return intentDonationDAO.create(intentDonation);
+    }
+
+    public IntentDonation createDonator(IntentDonation intentDonation) throws ClassNotFoundException, SQLException {
+        LOGGER.info("Creating Intent & Donator");
+
+        intentDonation.setBloodDonator(bloodDonatorService.create(intentDonation.getBloodDonator()));
 
         return intentDonationDAO.create(intentDonation);
     }
