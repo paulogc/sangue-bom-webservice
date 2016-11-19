@@ -19,6 +19,12 @@ public class IntentDonationController {
         return intentDonationService.create(intentDonation);
     }
 
+    @PostMapping(value = "/create-donator")
+    @ResponseBody
+    public IntentDonation createDonator (@RequestBody IntentDonation intentDonation) throws ClassNotFoundException, SQLException {
+        return intentDonationService.createDonator(intentDonation);
+    }
+
     @GetMapping(value = "/find-all-by-user={user_id}")
     @ResponseBody
     public List<IntentDonation> findAllByUserId (@PathVariable("user_id") Long user_id) throws ClassNotFoundException, SQLException {
