@@ -44,7 +44,7 @@ public class BloodDonatorController {
         return("Successfully deleted");
     }
     
-    @GetMapping(value = "/{cpf}")
+    @GetMapping(value = "/find-by-cpf/{cpf}")
     public BloodDonator findOneByCpf (@PathVariable ("cpf") String cpf) throws ClassNotFoundException, SQLException {
     	return bloodDonatorService.findOneByCpf(cpf);
     }
