@@ -175,11 +175,17 @@ public class IntentDonationDAO {
             throws SQLException {
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         String createdAt = dateFormat.format(intentDonation.getCreatedAt());
-        String grantDate = dateFormat.format(intentDonation.getGrantDate());
-
+        
+        if (intentDonation.getGrantDate() != null) {
+        	String grantDate = dateFormat.format(intentDonation.getGrantDate());	
+        	statement.setString(3, grantDate);
+        } else {
+        	statement.setString(3, null);
+        }
+  
         statement.setString(1, createdAt);
         statement.setInt(2, intentDonation.getStatus());
-        statement.setString(3, grantDate);
+        
         statement.setLong(4, intentDonation.getBloodDonator().getId());
 
         return statement;

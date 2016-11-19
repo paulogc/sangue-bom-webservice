@@ -21,9 +21,9 @@ public class NewsController {
         return newsService.create(news);
     }
 
-    @PutMapping(value = "/update")
+    @PutMapping(value = "/{id}")
     @ResponseBody
-    public News update (@RequestBody News news) throws ClassNotFoundException, SQLException {
+    public News update (@PathVariable("id") Long id, @RequestBody News news) throws ClassNotFoundException, SQLException {
         return newsService.update(news);
     }
 

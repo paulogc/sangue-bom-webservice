@@ -39,16 +39,16 @@ public class AdministratorController {
         return (administratorService.findOneById(id));
     }
 	
-    @PutMapping("/update")
+    @PutMapping("/{id}")
     @ResponseBody
-    public Administrator update (@RequestBody Administrator administrator) throws
+    public Administrator update (@PathVariable("id") Long id, @RequestBody Administrator administrator) throws
             ClassNotFoundException, SQLException {
         return (administratorService.update(administrator));
     }
 
-    @DeleteMapping("/delete")
+    @DeleteMapping("/{id}")
     @ResponseBody
-    public String delete (@RequestBody Administrator administrator) throws ClassNotFoundException, SQLException {
+    public String delete (@PathVariable("id") Long id, @RequestBody Administrator administrator) throws ClassNotFoundException, SQLException {
         administratorService.delete(administrator);
 
         return("Successfuly deleted");

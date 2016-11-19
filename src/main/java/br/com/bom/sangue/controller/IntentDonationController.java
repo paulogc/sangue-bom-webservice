@@ -37,13 +37,13 @@ public class IntentDonationController {
         return intentDonationService.findByNeighborhood(neighborhood);
     }
     
-    @PutMapping(value = "/update")
+    @PutMapping(value = "/{id}")
     @ResponseBody
-    public IntentDonation update (@RequestBody IntentDonation intentDonation) throws ClassNotFoundException, SQLException {
+    public IntentDonation update (@PathVariable("id") Long id, @RequestBody IntentDonation intentDonation) throws ClassNotFoundException, SQLException {
         return intentDonationService.update(intentDonation);
     }
 
-    @DeleteMapping(value = "/delete={id}")
+    @DeleteMapping(value = "/{id}")
     @ResponseBody
     public String delete (@PathVariable("id") Long id) throws ClassNotFoundException, SQLException {
         intentDonationService.delete(id);
