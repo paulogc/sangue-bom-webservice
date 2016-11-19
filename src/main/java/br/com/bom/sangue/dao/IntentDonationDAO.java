@@ -5,6 +5,7 @@ import br.com.bom.sangue.config.DatabaseConnection;
 import br.com.bom.sangue.entities.BloodDonator;
 import br.com.bom.sangue.entities.IntentDonation;
 import br.com.bom.sangue.entities.News;
+import br.com.bom.sangue.entities.RankingDonations;
 
 import java.sql.*;
 import java.text.DateFormat;
@@ -27,6 +28,10 @@ public class IntentDonationDAO {
     private String updateQuery = "UPDATE intent_donation SET status = ?, grant_date = ? WHERE id = ?";
 
     private String deleteQuery = "DELETE FROM intent_donation WHERE id = ?";
+    
+    private String findRankingDonationQuery = "SELECT b.nickname AS blood_donator, COUNT(i.id) AS number_donations "
+    		+ "FROM intent_donation i JOIN blood_donator b ON i.blood_donator = b.id "
+    		+ "WHERE i.grant_date IS NOT NULL GROUP BY i.id ORDER BY number_donations";
 
     private String findLastInsertedQuery = "SELECT MAX(id) AS id FROM intent_donation";
 
@@ -76,6 +81,31 @@ public class IntentDonationDAO {
         statement.close();
 
         return intentDonations;
+    }
+    
+    public List<RankingDonations> findAllByRanking() throws ClassNotFoundException, SQLException {
+        List<RankingDonations> rankingDonations = new ArrayList<>();
+        RankingDonations rankingDonation;
+   
+        DatabaseConnection dataBase = DatabaseConnection.getInstance();
+        Connection connection = dataBase.getConnection();
+
+        PreparedStatement statement = connection.prepareStatement(findRankingDonationQuery);
+
+        ResultSet result = statement.executeQuery();
+
+        while (result.next()) {
+            rankingDonation = new RankingDonations();
+
+            rankingDonation.setBloodDonator(result.getString("blood_donator"));
+            rankingDonation.setNumberDonations(result.getInt("number_donations"));
+            
+            rankingDonations.add(rankingDonation);
+        }
+
+        statement.close();
+
+        return rankingDonations;
     }
 
     public List<IntentDonation> findAllIntentDonation() throws ClassNotFoundException, SQLException {

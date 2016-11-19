@@ -2,6 +2,8 @@ package br.com.bom.sangue.service;
 
 import br.com.bom.sangue.dao.IntentDonationDAO;
 import br.com.bom.sangue.entities.IntentDonation;
+import br.com.bom.sangue.entities.RankingDonations;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -86,5 +88,9 @@ public class IntentDonationService {
         LOGGER.info("> Id {}", id);
 
         intentDonationDAO.delete(id);
+    }
+    
+    public List<RankingDonations> getRankingDonations () throws ClassNotFoundException, SQLException {
+    	return intentDonationDAO.findAllByRanking();
     }
 }
