@@ -10,8 +10,6 @@ import java.sql.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
-import org.flywaydb.core.internal.util.DateUtils;
-
 public class UserDAO {
 
     private String insertQuery = "INSERT INTO user (name, email, birth_date, address_id, telephone_id)" +

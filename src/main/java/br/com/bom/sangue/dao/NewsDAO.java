@@ -12,7 +12,6 @@ import java.util.List;
 
 import br.com.bom.sangue.entities.User;
 import br.com.bom.sangue.service.NewsService;
-import com.mysql.jdbc.Statement;
 
 import br.com.bom.sangue.config.DatabaseConnection;
 import br.com.bom.sangue.entities.Administrator;
