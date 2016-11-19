@@ -15,6 +15,8 @@ public class BloodDonatorDAO {
             " VALUES (?, ?, ?, ?, ?)";
 
     private String findOneById = "SELECT * FROM blood_donator WHERE user_id = ?";
+    
+    private String findOneByCpf = "SELECT * FROM blood_donator WHERE cpf = ?";
 
     private String updateQuery = "UPDATE blood_donator SET blood_type = ?, blood_factor = ?, cpf = ?, nickname = ?" +
             " WHERE user_id = ?";
@@ -50,6 +52,31 @@ public class BloodDonatorDAO {
 
         statement.setLong(1, id);
 
+        ResultSet result = statement.executeQuery();
+
+        while (result.next()) {
+            bloodDonator.setBloodType(result.getString("blood_type"));
+            bloodDonator.setBloodFactor(result.getString("blood_factor"));
+            bloodDonator.setCPF(result.getString("cpf"));
+            bloodDonator.setNickname(result.getString("nickname"));
+            bloodDonator.setId(result.getLong("user_id"));
+        }
+
+        statement.close();
+
+        return bloodDonator;
+    }
+    
+    public BloodDonator findOneByCpf (String cpf) throws ClassNotFoundException, SQLException {
+    	BloodDonator bloodDonator = new BloodDonator();
+    	
+        DatabaseConnection dataBase = DatabaseConnection.getInstance();
+        Connection connection = dataBase.getConnection();
+
+        PreparedStatement statement = connection.prepareStatement(findOneByCpf);
+        
+        statement.setString(1, cpf);
+        
         ResultSet result = statement.executeQuery();
 
         while (result.next()) {

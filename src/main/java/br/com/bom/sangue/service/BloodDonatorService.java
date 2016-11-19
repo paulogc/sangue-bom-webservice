@@ -88,5 +88,8 @@ public class BloodDonatorService {
         userService.delete(user);
     }
 
-
+    public BloodDonator findOneByCpf(String cpf) throws ClassNotFoundException, SQLException {
+    	return bloodDonatorDAO.findOneByCpf(cpf);
+    }
 }
+
