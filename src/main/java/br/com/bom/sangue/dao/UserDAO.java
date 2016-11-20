@@ -16,6 +16,8 @@ public class UserDAO {
             " VALUES(?, ?, ?, ?, ?)";
 
     private String findOneByIdQuery = "SELECT * FROM user WHERE id = ?";
+    
+    private String findOneByEmail = "SELECT * FROM user WHERE email = ?";
 
     private String updateQuery = "UPDATE user SET name = ?, email = ?, birth_date = ?," +
             " address_id = ?, telephone_id = ? WHERE id = ?";
@@ -66,6 +68,30 @@ public class UserDAO {
 
             user.setAddress(address);
             user.setTelephone(telephone);
+        }
+
+        statement.close();
+
+        return user;
+    }
+    
+    public User findOneByEmail(String email) throws ClassNotFoundException, SQLException {
+        User user = new User();
+
+        DatabaseConnection dataBase = DatabaseConnection.getInstance();
+        Connection connection = dataBase.getConnection();
+
+        PreparedStatement statement = connection.prepareStatement(findOneByEmail);
+
+        statement.setString(1, email);
+
+        ResultSet result  = statement.executeQuery();
+
+        while (result.next()) {
+            user.setId(result.getLong("id"));
+            user.setName(result.getString("name"));
+            user.setEmail(result.getString("email"));
+            user.setBirthDate(result.getDate("birth_date"));
         }
 
         statement.close();

@@ -69,5 +69,9 @@ public class UserService {
         addressService.delete(user.getAddress().getId());
         telephoneService.delete(user.getTelephone().getId());
     }
+    
+    public User findOneByEmail (String email) throws ClassNotFoundException, SQLException {
+    	return userDao.findOneByEmail(email);
+    }
 
 }

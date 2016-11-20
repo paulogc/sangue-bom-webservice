@@ -56,29 +56,47 @@ public class AdministratorService {
 	}
 	
 	 public Administrator update(Administrator administrator) throws ClassNotFoundException, SQLException {
-	        LOGGER.info("Updating Administrator");
+		 LOGGER.info("Updating Administrator");
 
-	        LOGGER.info("> Password {}", administrator.getPassword());
-	        
-	        User user = new User(administrator.getId(), administrator.getName(), administrator.getEmail(),
-	        		administrator.getBirthDate(), administrator.getAddress(), administrator.getTelephone());
+		 LOGGER.info("> Password {}", administrator.getPassword());
+        
+		 User user = new User(administrator.getId(), administrator.getName(), administrator.getEmail(),
+        		administrator.getBirthDate(), administrator.getAddress(), administrator.getTelephone());
 
-	        user = userService.update(user);
+		 user = userService.update(user);
 
-	        administrator = administratorDAO.update(administrator);
+		 administrator = administratorDAO.update(administrator);
 
-	        return administrator;
-	    }
+		 return administrator;
+    }
 
-	    public void delete(Administrator administrator) throws ClassNotFoundException, SQLException {
-	        LOGGER.info("Deleting Administrator");
+    public void delete(Administrator administrator) throws ClassNotFoundException, SQLException {
+    	LOGGER.info("Deleting Administrator");
 
-	        User user = new User(administrator.getId(), administrator.getName(), administrator.getEmail(),
-	        		administrator.getBirthDate(), administrator.getAddress(), administrator.getTelephone());
+        User user = new User(administrator.getId(), administrator.getName(), administrator.getEmail(),
+        		administrator.getBirthDate(), administrator.getAddress(), administrator.getTelephone());
 
-	        administratorDAO.delete(administrator.getId());
+        administratorDAO.delete(administrator.getId());
 
-	        userService.delete(user);
-	    }
+        userService.delete(user);
+    }
+    
+    public Boolean login (String email, String password) throws ClassNotFoundException, SQLException {
+    	User user = userService.findOneByEmail(email);
+    	
+    	if (user.getId() == null) {
+    		LOGGER.info("Wrong USER");
+    		return Boolean.FALSE;
+    	}
+    	
+    	Administrator administrator = administratorDAO.findOneById(user.getId());
+    	
+    	if (!password.equals(administrator.getPassword())) {
+    		LOGGER.info("Wrong PASSWORD");
+    		return Boolean.FALSE;
+    	}
+    	
+		return Boolean.TRUE;
+    }
 	
 }

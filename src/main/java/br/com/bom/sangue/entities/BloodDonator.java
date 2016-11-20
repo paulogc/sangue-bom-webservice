@@ -6,17 +6,17 @@ import java.util.Date;
 public class BloodDonator extends User {
     private String bloodType;
     private String bloodFactor;
-    private String CPF;
+    private String cpf;
     private String nickname;
 
     public BloodDonator() {}
 
     public BloodDonator(Long id, String name, String email, Date birthdate, Address address, Telephone telephone,
-                        String bloodType, String bloodFactor, String CPF, String nickname) {
+                        String bloodType, String bloodFactor, String cpf, String nickname) {
         super(id, name, email, birthdate, address, telephone);
         this.bloodType = bloodType;
         this.bloodFactor = bloodFactor;
-        this.CPF = CPF;
+        this.cpf = cpf;
         this.nickname = nickname;
     }
 
@@ -36,12 +36,12 @@ public class BloodDonator extends User {
         this.bloodFactor = bloodFactor;
     }
 
-    public String getCPF() {
-        return CPF;
+    public String getCpf() {
+        return cpf;
     }
 
-    public void setCPF(String CPF) {
-        this.CPF = CPF;
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
     }
 
     public String getNickname() {

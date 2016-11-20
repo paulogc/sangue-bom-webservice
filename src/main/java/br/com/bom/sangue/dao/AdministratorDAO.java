@@ -22,6 +22,7 @@ public class AdministratorDAO {
     private String deleteQuery = "DELETE FROM administrator WHERE user_id = ?";
     
     private String findLastInsertedQuery = "SELECT MAX(user_id) AS id FROM administrator";
+    
 	
 	public Administrator create (Administrator administrator, User user) throws ClassNotFoundException, SQLException {
 		DatabaseConnection dataBase = DatabaseConnection.getInstance();

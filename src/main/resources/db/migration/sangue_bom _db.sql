@@ -29,8 +29,8 @@ create table user(
 	name varchar(255) not null,
 	email varchar(255) not null,
 	birth_date date not null,
-	address_id bigint unsigned not null,
-	telephone_id bigint unsigned not null,
+	address_id bigint unsigned,
+	telephone_id bigint unsigned,
 	primary key (id),
 	foreign key (address_id) references address(id),
 	foreign key (telephone_id) references telephone(id)
@@ -79,3 +79,6 @@ create table intent_donation(
 	primary key (id),
 	foreign key (blood_donator_id) references blood_donator(user_id)
 );
+
+INSERT into user (name, email, birth_date, address_id, telephone_id) VALUES ('Administrador', 'adm@adm.com.br', '2000-01-01', NULL, NULL);
+INSERT into administrator (user_id, password) VALUES (1, 'adm');

@@ -54,4 +54,12 @@ public class AdministratorController {
         return("Successfuly deleted");
     }
     
+    @GetMapping(value = "/login/{email}&{password}")
+    public Boolean login (@PathVariable("email") String email, @PathVariable("password") String password) throws ClassNotFoundException, SQLException {
+    	LOGGER.info("Email: {}", email);
+    	LOGGER.info("Senha: {}", password);
+    	
+    	return administratorService.login(email, password);
+    }
+    
 }

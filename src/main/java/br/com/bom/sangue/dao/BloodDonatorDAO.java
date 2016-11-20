@@ -57,7 +57,7 @@ public class BloodDonatorDAO {
         while (result.next()) {
             bloodDonator.setBloodType(result.getString("blood_type"));
             bloodDonator.setBloodFactor(result.getString("blood_factor"));
-            bloodDonator.setCPF(result.getString("cpf"));
+            bloodDonator.setCpf(result.getString("cpf"));
             bloodDonator.setNickname(result.getString("nickname"));
             bloodDonator.setId(result.getLong("user_id"));
         }
@@ -82,7 +82,7 @@ public class BloodDonatorDAO {
         while (result.next()) {
             bloodDonator.setBloodType(result.getString("blood_type"));
             bloodDonator.setBloodFactor(result.getString("blood_factor"));
-            bloodDonator.setCPF(result.getString("cpf"));
+            bloodDonator.setCpf(result.getString("cpf"));
             bloodDonator.setNickname(result.getString("nickname"));
             bloodDonator.setId(result.getLong("user_id"));
         }
@@ -146,7 +146,7 @@ public class BloodDonatorDAO {
     private PreparedStatement createStatement(PreparedStatement statement, BloodDonator bloodDonator) throws SQLException {
         statement.setString(1, bloodDonator.getBloodType());
         statement.setString(2, bloodDonator.getBloodFactor());
-        statement.setString(3, bloodDonator.getCPF());
+        statement.setString(3, bloodDonator.getCpf());
         statement.setString(4, bloodDonator.getNickname());
 
         return statement;
@@ -155,7 +155,7 @@ public class BloodDonatorDAO {
     private PreparedStatement createStatement(PreparedStatement statement, BloodDonator bloodDonator, User user) throws SQLException {
         statement.setString(1, bloodDonator.getBloodType());
         statement.setString(2, bloodDonator.getBloodFactor());
-        statement.setString(3, bloodDonator.getCPF());
+        statement.setString(3, bloodDonator.getCpf());
         statement.setString(4, bloodDonator.getNickname());
         statement.setLong(5, user.getId());
 

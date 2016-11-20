@@ -107,8 +107,20 @@ public class AddressDAO {
 		statement.setString(5, address.getComplement());
 		statement.setString(6, address.getCity());
 		statement.setString(7, address.getState());
-		statement.setDouble(8, address.getLatitude());
-		statement.setDouble(9, address.getLongitude());
+		
+		if (address.getLatitude() != null) {
+			statement.setDouble(8, address.getLatitude());
+		} else {
+			statement.setDouble(8, 0);
+		}
+		
+		if (address.getLongitude() != null) {
+			statement.setDouble(9, address.getLongitude());
+		} else {
+			statement.setDouble(9, 0);
+		}
+		
+		
 		
 		return statement;
 	}

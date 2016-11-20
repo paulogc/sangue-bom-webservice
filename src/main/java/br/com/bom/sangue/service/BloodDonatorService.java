@@ -22,7 +22,7 @@ public class BloodDonatorService {
 
         LOGGER.info("> Bloood type {}", bloodDonator.getBloodType());
         LOGGER.info("> Bloood factor {}", bloodDonator.getBloodFactor());
-        LOGGER.info("> Bloood CPF {}", bloodDonator.getCPF());
+        LOGGER.info("> Bloood CPF {}", bloodDonator.getCpf());
         LOGGER.info("> Bloood nick name {}", bloodDonator.getNickname());
 
         User user = new User(bloodDonator.getName(), bloodDonator.getEmail(),
@@ -50,7 +50,7 @@ public class BloodDonatorService {
                 user.getTelephone(),
                 bloodDonator.getBloodType(),
                 bloodDonator.getBloodFactor(),
-                bloodDonator.getCPF(),
+                bloodDonator.getCpf(),
                 bloodDonator.getNickname()
         );
 
@@ -62,7 +62,7 @@ public class BloodDonatorService {
 
         LOGGER.info("> Bloood type {}", bloodDonator.getBloodType());
         LOGGER.info("> Bloood factor {}", bloodDonator.getBloodFactor());
-        LOGGER.info("> Bloood CPF {}", bloodDonator.getCPF());
+        LOGGER.info("> Bloood CPF {}", bloodDonator.getCpf());
         LOGGER.info("> Bloood nick name {}", bloodDonator.getNickname());
 
         User user = new User(bloodDonator.getId(), bloodDonator.getName(), bloodDonator.getEmail(),
