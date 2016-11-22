@@ -20,6 +20,8 @@ public class IntentDonationService {
 
     public IntentDonation create(IntentDonation intentDonation) throws ClassNotFoundException, SQLException {
         LOGGER.info("Creating Intent Donation");
+        
+        bloodDonatorService.update(intentDonation.getBloodDonator());
 
         LOGGER.info("> CreatedDate {}", intentDonation.getCreatedAt());
         LOGGER.info("> GrantDate {}", intentDonation.getGrantDate());

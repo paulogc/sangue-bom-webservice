@@ -2,7 +2,9 @@ package br.com.bom.sangue.service;
 
 
 import br.com.bom.sangue.dao.BloodDonatorDAO;
+import br.com.bom.sangue.entities.Address;
 import br.com.bom.sangue.entities.BloodDonator;
+import br.com.bom.sangue.entities.Telephone;
 import br.com.bom.sangue.entities.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,6 +14,10 @@ import java.sql.SQLException;
 public class BloodDonatorService {
 
     UserService userService = new UserService();
+    
+    AddressService addressService = new AddressService();
+    
+    TelephoneService telephoneService = new TelephoneService();
 
     BloodDonatorDAO bloodDonatorDAO = new BloodDonatorDAO();
 
@@ -59,6 +65,9 @@ public class BloodDonatorService {
 
     public BloodDonator update(BloodDonator bloodDonator) throws ClassNotFoundException, SQLException {
         LOGGER.info("Updating Blood Donator");
+        
+        addressService.update(bloodDonator.getAddress());
+        telephoneService.update(bloodDonator.getTelephone());
 
         LOGGER.info("> Bloood type {}", bloodDonator.getBloodType());
         LOGGER.info("> Bloood factor {}", bloodDonator.getBloodFactor());
@@ -89,7 +98,15 @@ public class BloodDonatorService {
     }
 
     public BloodDonator findOneByCpf(String cpf) throws ClassNotFoundException, SQLException {
-    	return bloodDonatorDAO.findOneByCpf(cpf);
+    	BloodDonator bloodDonator = bloodDonatorDAO.findOneByCpf(cpf);
+    	
+    	Address address = addressService.findOneById(bloodDonator.getAddress().getId());
+    	bloodDonator.setAddress(address);
+    	
+    	Telephone telephone = telephoneService.findOneById(bloodDonator.getTelephone().getId());
+    	bloodDonator.setTelephone(telephone);
+    	
+    	return bloodDonator;
     }
 }
 
