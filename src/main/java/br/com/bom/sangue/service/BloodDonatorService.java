@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.sql.SQLException;
+import java.util.Date;
 
 public class BloodDonatorService {
 
@@ -100,13 +101,17 @@ public class BloodDonatorService {
     public BloodDonator findOneByCpf(String cpf) throws ClassNotFoundException, SQLException {
     	BloodDonator bloodDonator = bloodDonatorDAO.findOneByCpf(cpf);
     	
-    	Address address = addressService.findOneById(bloodDonator.getAddress().getId());
-    	bloodDonator.setAddress(address);
-    	
-    	Telephone telephone = telephoneService.findOneById(bloodDonator.getTelephone().getId());
-    	bloodDonator.setTelephone(telephone);
-    	
-    	return bloodDonator;
+    	if (bloodDonator.getId() != null) {
+    		User user = userService.findOneById(bloodDonator.getId());
+    		
+    		bloodDonator.setName(user.getName());
+    		bloodDonator.setEmail(user.getEmail());
+    		bloodDonator.setBirthDate(user.getBirthDate());
+    		bloodDonator.setAddress(user.getAddress());
+    		bloodDonator.setTelephone(user.getTelephone());
+      	}
+    	    	
+    	return bloodDonator	;
     }
 }
 

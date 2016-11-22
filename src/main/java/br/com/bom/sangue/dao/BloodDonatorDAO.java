@@ -1,7 +1,9 @@
 package br.com.bom.sangue.dao;
 
 import br.com.bom.sangue.config.DatabaseConnection;
+import br.com.bom.sangue.entities.Address;
 import br.com.bom.sangue.entities.BloodDonator;
+import br.com.bom.sangue.entities.Telephone;
 import br.com.bom.sangue.entities.User;
 
 import java.sql.Connection;
