@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.List;
 
 public class IntentDonationService {
@@ -66,6 +67,19 @@ public class IntentDonationService {
 
         return intentDonations;
     }
+    
+    public List<IntentDonation> findAllIntentDonationWithGrant() throws ClassNotFoundException, SQLException {
+        LOGGER.info("Finding all intent conations");
+
+        List<IntentDonation> intentDonations = intentDonationDAO.findAllIntentDonationWithGrant();
+
+        for (IntentDonation intentDonation : intentDonations) {
+
+            intentDonation.setBloodDonator(bloodDonatorService.findOneById(intentDonation.getBloodDonator().getId()));
+        }
+
+        return intentDonations;
+    }
 
     public List<IntentDonation> findByNeighborhood(String neighborhood) throws ClassNotFoundException, SQLException {
         LOGGER.info("Finding all intent by neighborhood");
@@ -80,6 +94,10 @@ public class IntentDonationService {
         return intentDonations;
     }
     
+    public List<IntentDonation> findAll () throws ClassNotFoundException, SQLException {
+    	return intentDonationDAO.findAll();
+    }
+    
     public IntentDonation update(IntentDonation intentDonation) throws ClassNotFoundException, SQLException {
         LOGGER.info("Updating Intent Donation");
 
@@ -89,6 +107,7 @@ public class IntentDonationService {
         LOGGER.info("> BloodDonator {}", intentDonation.getBloodDonator().getId());
 
         intentDonation.setBloodDonator(bloodDonatorService.findOneById(intentDonation.getBloodDonator().getId()));
+        intentDonation.setGrantDate(new Date());
 
         return intentDonationDAO.update(intentDonation);
     }

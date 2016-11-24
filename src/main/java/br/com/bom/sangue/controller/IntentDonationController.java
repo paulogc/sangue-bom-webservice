@@ -42,13 +42,19 @@ public class IntentDonationController {
     public List<IntentDonation> findAllIntentDonation () throws ClassNotFoundException, SQLException {
         return intentDonationService.findAllIntentDonation();
     }
+    
+    @GetMapping(value = "/find-all-grant")
+    @ResponseBody
+    public List<IntentDonation> findAllIntentDonationWithGrant () throws ClassNotFoundException, SQLException {
+        return intentDonationService.findAllIntentDonationWithGrant();
+    }
 
     @GetMapping(value = "/find-by-neighborhood={neighborhood}")
     @ResponseBody
     public List<IntentDonation> findByNeighborhood (@PathVariable("neighborhood") String neighborhood) throws ClassNotFoundException, SQLException {
         return intentDonationService.findByNeighborhood(neighborhood);
     }
-    
+        
     @PutMapping(value = "/{id}")
     @ResponseBody
     public IntentDonation update (@PathVariable("id") Long id, @RequestBody IntentDonation intentDonation) throws ClassNotFoundException, SQLException {

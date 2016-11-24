@@ -19,11 +19,15 @@ public class IntentDonationDAO {
 
     private String findAllByUserId = "SELECT * FROM intent_donation WHERE blood_donator_id = ?";
 
-    private String findAllIntentDonationQuery = "SELECT * FROM intent_donation";
+    private String findAllIntentDonationQuery = "SELECT * FROM intent_donation WHERE grant_date IS NULL ORDER BY created_at ASC";
+    
+    private String findAllIntentDonationWithGrantQuery = "SELECT * FROM intent_donation WHERE grant_date IS NOT NULL ORDER BY created_at ASC";
     
     private String findByNeighborhoodQuery = "SELECT i.id, i.created_at, i.status, i.grant_date, i.blood_donator_id "
     		+ "FROM intent_donation i INNER JOIN blood_donator bd ON i.blood_donator_id = bd.user_id INNER JOIN user u ON "
     		+ "bd.user_id = u.id INNER JOIN address ad ON u.address_id = ad.id AND ad.neighborhood = ?";
+    
+    private String findAll = "SELECT * FROM intent_donation WHERE grant_date IS NULL ORDER BY created_at ASC";
 
     private String updateQuery = "UPDATE intent_donation SET status = ?, grant_date = ? WHERE id = ?";
 
@@ -136,6 +140,35 @@ public class IntentDonationDAO {
 
         return intentDonationList;
     }
+    
+    public List<IntentDonation> findAllIntentDonationWithGrant() throws ClassNotFoundException, SQLException {
+        List<IntentDonation> intentDonationList = new ArrayList<>();
+        IntentDonation intentDonation;
+        BloodDonator bloodDonator;
+
+        DatabaseConnection dataBase = DatabaseConnection.getInstance();
+        Connection connection = dataBase.getConnection();
+
+        PreparedStatement statement = connection.prepareStatement(findAllIntentDonationWithGrantQuery);
+
+        ResultSet result = statement.executeQuery();
+
+        while (result.next()) {
+            intentDonation = new IntentDonation();
+            bloodDonator = new BloodDonator();
+
+            intentDonation.setId(result.getLong("id"));
+            intentDonation.setCreatedAt(result.getDate("created_at"));
+            intentDonation.setGrantDate(result.getDate("grant_date"));
+            intentDonation.setStatus(result.getInt("status"));
+            bloodDonator.setId(result.getLong("blood_donator_id"));
+            intentDonation.setBloodDonator(bloodDonator);
+
+            intentDonationList.add(intentDonation);
+        }
+
+        return intentDonationList;
+    }
 
     public List<IntentDonation> findByNeighborhood(String neighborhood) throws ClassNotFoundException, SQLException {
         List<IntentDonation> intentDonationList = new ArrayList<>();
@@ -149,6 +182,35 @@ public class IntentDonationDAO {
         
         statement.setString(1, neighborhood);
         
+        ResultSet result = statement.executeQuery();
+
+        while (result.next()) {
+            intentDonation = new IntentDonation();
+            bloodDonator = new BloodDonator();
+
+            intentDonation.setId(result.getLong("id"));
+            intentDonation.setCreatedAt(result.getDate("created_at"));
+            intentDonation.setGrantDate(result.getDate("grant_date"));
+            intentDonation.setStatus(result.getInt("status"));
+            bloodDonator.setId(result.getLong("blood_donator_id"));
+            intentDonation.setBloodDonator(bloodDonator);
+
+            intentDonationList.add(intentDonation);
+        }
+
+        return intentDonationList;
+    }
+    
+    public List<IntentDonation> findAll() throws ClassNotFoundException, SQLException {
+        List<IntentDonation> intentDonationList = new ArrayList<>();
+        IntentDonation intentDonation;
+        BloodDonator bloodDonator;
+
+        DatabaseConnection dataBase = DatabaseConnection.getInstance();
+        Connection connection = dataBase.getConnection();
+
+        PreparedStatement statement = connection.prepareStatement(findAll);
+                
         ResultSet result = statement.executeQuery();
 
         while (result.next()) {
