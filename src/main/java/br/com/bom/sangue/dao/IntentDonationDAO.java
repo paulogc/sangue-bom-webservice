@@ -33,9 +33,9 @@ public class IntentDonationDAO {
 
     private String deleteQuery = "DELETE FROM intent_donation WHERE id = ?";
     
-    private String findRankingDonationQuery = "SELECT b.nickname AS blood_donator, COUNT(i.id) AS number_donations "
-    		+ "FROM intent_donation i JOIN blood_donator b ON i.blood_donator = b.id "
-    		+ "WHERE i.grant_date IS NOT NULL GROUP BY i.id ORDER BY number_donations";
+    private String findRankingDonationQuery = "SELECT b.nickname AS blood_donator, COUNT(i.id) AS number_donations FROM "
+    		+ "intent_donation i JOIN blood_donator b ON i.blood_donator_id = b.user_id WHERE i.grant_date IS NOT NULL "
+    		+ "GROUP BY i.blood_donator_id ORDER BY number_donations DESC";
 
     private String findLastInsertedQuery = "SELECT MAX(id) AS id FROM intent_donation";
 
